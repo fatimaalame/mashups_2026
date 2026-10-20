@@ -1,3 +1,5 @@
+![Logo TPG](other/logo_tpg.png)
+
 # Mashups 2026
 Practical assignments for the Mashups and Contextualisation  
 
