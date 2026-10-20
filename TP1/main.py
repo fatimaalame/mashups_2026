@@ -25,11 +25,9 @@ fichier_km = Path(__file__).parent / "data" / "kilometres.json"
 with open(fichier_km, "r", encoding="utf-8") as f:
     kilometres = json.load(f)
 
-
-## Début de l'application
+##Début de l'application
 print ("Bienvenue dans TPG open data")
 print ("Nombre d'enregistrements : ", len(frequentation))
-
 
 def fiche_ligne():
     print("\n--- Recherche d'une ligne TPG ---")
@@ -37,7 +35,7 @@ def fiche_ligne():
     ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
     resultats = []
 
-    # Pour le nombre d'enregistrements trouvés
+    #pr le nombre d'enregistrements trouvés
     for enregistrement in frequentation:
         if (enregistrement["ligne"] == ligne_recherchee
                 and enregistrement["annee"] == "2025"):
@@ -45,7 +43,7 @@ def fiche_ligne():
 
     print("Nombre d'enregistrements trouvés:", len(resultats))
 
-    # Pour le total des montées
+    #pr le total des montées
     total_montees = 0
 
     for enregistrement in resultats:
@@ -53,7 +51,7 @@ def fiche_ligne():
 
     print("Total des montées:", round(total_montees, 2))
 
-    # Pour le total des descentes
+    #pr le total des descentes
     total_descentes = 0
 
     for enregistrement in resultats:
@@ -61,7 +59,7 @@ def fiche_ligne():
 
     print("Total des descentes:", round(total_descentes, 2))
 
-    # Recherche des arrets desservis par la ligne
+    #recherche des arrets desservis par la ligne
     #here im using the xml file 
     ligne_xml = ligne_recherchee.zfill(2)
 
@@ -105,5 +103,5 @@ def fiche_ligne():
         total_km += enregistrement["km_prod"]
 
     print("Total des kilomètres produits en 2025 :", round(total_km, 2))
-
 fiche_ligne()
+
