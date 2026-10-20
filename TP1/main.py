@@ -43,10 +43,30 @@ for enregistrement in resultats:
 print("Total des descentes:", round(total_descentes, 2))
 
 
-# Lecture du fichier XML des arrêts TPG
+# Pour lire le fichier xml pr lire les arrets s
 fichier_xml = Path(__file__).parent / "data" / "arrets.xml"
 
 arbre = ET.parse(fichier_xml)
 racine = arbre.getroot()
 
 print("\nNombre d'entrées d'arrêts dans le XML :", len(racine))
+
+# Recherche des arrets desservis par la ligne
+ligne_xml = ligne_recherchee.zfill(2)
+
+arrets_ligne = []
+
+for arret in racine.findall("arret"):
+    lignes = arret.findall("lignes/ligne")
+
+    for ligne in lignes:
+        if ligne.text == ligne_xml:
+            arrets_ligne.append(arret.findtext("nom"))
+            break
+
+print("\nArrêts desservis par la ligne", ligne_recherchee, ":")
+
+for nom in arrets_ligne:
+    print("-", nom)
+
+print("Nombre d'entrées d'arrêts :", len(arrets_ligne))
