@@ -172,5 +172,61 @@ def top_5_arrets():
         codes_manquants = codes - codes_trouves
         if codes_manquants:
             print("  Codes absents du XML :", sorted(codes_manquants))               
-top_5_arrets()
 
+############ SCENARIO 3 -> Classement des lignes par nombre d'arrêts
+def classement_lignes():
+    print("\n--- Classement des lignes TPG ---")
+
+    arrets_par_ligne = {}
+
+    for arret in racine.findall("arret"):
+        nom = arret.findtext("nom")
+
+        for ligne in arret.findall("lignes/ligne"):
+            numero = ligne.text
+
+            if numero not in arrets_par_ligne:
+                arrets_par_ligne[numero] = set()
+
+            arrets_par_ligne[numero].add(nom)
+
+    print("Nombre de lignes trouvées :", len(arrets_par_ligne))
+    nombre_arrets = {} #créé nv dico avec num de chaque ligne et son nb stops
+
+    for numero, arrets in arrets_par_ligne.items(): #on parcourt le dico 
+        nombre_arrets[numero] = len(arrets) #compte éléments de l'ens + enregistre résults
+
+    classement = sorted(
+    nombre_arrets.items(), #récupère couple num + nb d'arrets 
+    key=lambda element: element[1], #el[1] = nb d'arret 
+    reverse=True #classe du + grd au + ptt 
+    )
+
+    # Calculer les montées en 2025 pour chaque ligne
+    montees_par_ligne = {} #create a new dico (num ligne à son total de montées 2025) 
+
+    for enregistrement in frequentation: #parcourt ts les enre du json
+        if enregistrement["annee"] == "2025":
+            numero = enregistrement["ligne"].zfill(2) #we only keep yr 2025 
+
+            if numero not in montees_par_ligne:
+                montees_par_ligne[numero] = 0
+
+            montees_par_ligne[numero] += enregistrement["nb_de_montees"]
+
+    print("\nTop 10 des lignes avec le plus d'arrêts :")
+
+    for numero, nombre in classement[:10]:
+        if numero in montees_par_ligne:
+            montees = round(montees_par_ligne[numero], 2)
+            frequentation_texte = str(montees) + " montées en 2025"
+        else:
+            frequentation_texte = "Données de fréquentation indisponibles"
+
+        print(
+            "Ligne", numero, ":",
+            nombre, "arrêts distincts -",
+            frequentation_texte
+        )
+
+classement_lignes()       

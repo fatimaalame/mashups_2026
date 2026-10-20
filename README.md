@@ -88,3 +88,39 @@ Le programme affiche aussi les codes des quais et leurs coordonnées GPS quand i
 
 **Attention :** Enfait, les noms des arrêts ne sont pas toujours écrits de la même manière dans le JSON et le XML. Donc au lieu de les comparer directement par leur nom, j'ai utilisé les codes des quais pour faire la correspondance entre les deux fichiers. Par ex, pour Gare Cornavin, le JSON contient 3 codes : CVIN00, CVIN01 et CVIN03. Mais le programme ne retrouve que CVIN01 et CVIN03 dans le XML. J'ai donc ajouté une vérification pour afficher les codes absents. Et aussi, comme certains arrêts ont plusieurs quais, ils peuvent avoir plusieurs coordonnées GPS.
 Enfin, j'ai testé avec la ligne 9999, qui ne possède aucune donnée de fréquentation en 2025 dans mon fichier. Dans ce cas, le programme affiche simplement un message pour prévenir l'utilisateur au lieu de continuer avec un classement vide.
+
+### Scénario 3: Top 10 des lignes TPG avec le plus d'arrêts
+
+Pour ce troisième scénario, j'ai voulu savoir quelles sont les lignes TPG qui desservent le plus d'arrêts. Le programme analyse donc toutes les lignes présentes dans le XML et affiche les 10 premières avec leur fréquentation en 2025.
+
+J'ai combiné 2 fichiers (arrets.xml et frequentation.json) pour :
+
+- Récupérer toutes les lignes présentes dans le XML et les arrêts qu'elles desservent
+- Enlever les noms d'arrêts en double avec set(), car un même arrêt peut avoir plusieurs quais
+- Compter le nombre de noms d'arrêts distincts pour chaque ligne
+- Classer les lignes de celle qui a le plus d'arrêts à celle qui en a le moins
+- Afficher uniquement les 10 premières
+- Calculer le total des montées en 2025 pour chaque ligne à partir du JSON
+
+**Exemple avec les données TPG :**
+
+| Ligne | Arrêts distincts | Montées en 2025 |
+|---|---:|---:|
+| 01 | 44 | 6 892 915,82 |
+| 20 | 43 | 3 559 197,45 |
+| 54 | 43 | 252 972,95 |
+| 38 | 43 | 720 297,71 |
+| 05 | 39 | 6 375 036,69 |
+| A | 37 | Données indisponibles |
+| 83 | 35 | 242 246,12 |
+| 60 | 35 | 3 180 404,82 |
+| 07 | 33 | 5 296 553,26 |
+| 09 | 33 | 7 162 498,39 |
+
+Le programme a trouvé 91 lignes différentes dans le XML, mais j'ai décidé d'afficher uniquement les 10 premières pour que le résultat soit plus lisible dans le terminal : )
+
+**Particularités des données :** Comme dans le scénario 1, les numéros de ligne ne sont pas toujours écrits de la même manière dans les deux fichiers. J'ai donc utilisé zfill(2) pour pouvoir comparer les numéros du JSON avec ceux du XML.
+
+J'ai aussi remarqué que certaines lignes présentes dans le XML n'ont pas forcément de données de fréquentation correspondantes dans le JSON. Par exemple, la ligne A possède 37 noms d'arrêts distincts, mais aucune donnée de montées n'a été retrouvée pour 2025. Au lieu d'afficher 0, ce qui pourrait laisser penser que personne n'a utilisé cette ligne, j'ai préféré afficher "Données de fréquentation indisponibles".
+
+Et enfin, les arrêts sont comptés à partir de leurs noms distincts. Cela ne correspond donc pas forcément au nombre exact d'arrêts physiques du réseau.
