@@ -27,8 +27,8 @@ with open(fichier_km, "r", encoding="utf-8") as f:
 
 ##Début de l'application
 print ("Bienvenue dans TPG open data")
-print ("Nombre d'enregistrements : ", len(frequentation))
 
+# SCENARIO 1 -> fiche d'une ligne
 def fiche_ligne():
     print("\n--- Recherche d'une ligne TPG ---")
 
@@ -103,5 +103,74 @@ def fiche_ligne():
         total_km += enregistrement["km_prod"]
 
     print("Total des kilomètres produits en 2025 :", round(total_km, 2))
-fiche_ligne()
+
+
+## SCENARIO 2-> Top 5 arrets montés par ligne  
+def top_5_arrets():
+    print("\n--- Top 5 des arrêts les plus fréquentés ---")
+
+    ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
+
+    montees_par_arret = {}
+
+    for enregistrement in frequentation:
+        if (enregistrement["ligne"] == ligne_recherchee
+                and enregistrement["annee"] == "2025"):
+
+            nom = enregistrement["arret"]
+
+            if nom not in montees_par_arret:
+                montees_par_arret[nom] = 0
+
+            montees_par_arret[nom] += enregistrement["nb_de_montees"]
+
+    print("Nombre d'arrêts trouvés :", len(montees_par_arret))
+
+    if not montees_par_arret:
+        print("Aucune donnée de fréquentation trouvée pour cette ligne en 2025.")
+        return 
+
+    # Trier les arrêts selon le nombre de montées
+    classement = sorted(
+        montees_par_arret.items(), #.items = récupère les couples (nom, montées) du dico
+        key=lambda element: element[1], #lamba = fct sans nom qui indique à sorted quelle val utiliser pr effectuer tri
+        reverse=True #trie du + grd au + petit
+    )
+
+    # Afficher uniquement les 5 premiers
+    print("\nTop 5 des arrêts de la ligne", ligne_recherchee)
+
+    for nom, montees in classement[:5]: #conserve only first 5
+        print("-", nom, ":", round(montees, 2), "montées")
+
+    print("\nCodes des arrêts du top 5 :")
+    #to verify les codes des arrets du top 5
+    for nom, montees in classement[:5]:
+        codes = set()
+        codes_trouves = set()
+
+        for enregistrement in frequentation:
+            if (enregistrement["ligne"] == ligne_recherchee
+                    and enregistrement["annee"] == "2025"
+                    and enregistrement["arret"] == nom):
+                codes.add(enregistrement["arret_code_long"])
+
+        print(nom, ":", sorted(codes))
+        
+        #Chercher les coordonnées dans le XML
+        for arret in racine.findall("arret"):
+            code_xml = arret.findtext("code")
+
+            if code_xml in codes:
+                codes_trouves.add(code_xml)
+                latitude = arret.findtext("coordonnees/latitude")
+                longitude = arret.findtext("coordonnees/longitude")
+
+                print("  Quai", code_xml, ":", latitude, longitude)
+
+        #Afficher les codes absents du XML
+        codes_manquants = codes - codes_trouves
+        if codes_manquants:
+            print("  Codes absents du XML :", sorted(codes_manquants))               
+top_5_arrets()
 
