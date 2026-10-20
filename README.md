@@ -1,4 +1,4 @@
-# mashups_2026
+# Mashups 2026
 Practical assignments for the Mashups and Contextualisation course 
 
 J'aimerai créer un programme python utilisable dans le terminal qui combine des données sur les arrêts, la fréquentation et les kilomètres parcourus du réseau TPG etc...
@@ -59,13 +59,3 @@ Le programme affiche également les noms des arrêts distincts par ordre alphab�
 
 **Particularités des données :** Enfait, les numéros de ligne ne sont pas toujours écrits de la même manière dans les fichiers ("5" en JSON et "05" en XML), ce qui est un problème. Donc j'ai utilisé  "zfill(2)" pour gérer tout ça. Et aussi, le nombre de noms distincts ne correspond pas nécessairement au nombre exact d'arrêts physiques, donc je les ai aussi enlevés (les doublons).
 
-### Avancement
-
-- [x] Chargement des trois sources JSON/XML
-- [x] Première version fonctionnelle du scénario 1
-- [ ] Scénario 2 — Top 5 des arrêts les plus fréquentés d'une ligne
-- [ ] Scénario 3 — Nombre d'arrêts par ligne
-- [ ] Scénario 4 — Vacances et horaires normaux
-- [ ] Scénario 5 — Arrêts stratégiques du réseau
-- [ ] Menu interactif
-- [ ] Tests finaux et rapport
