@@ -12,7 +12,7 @@ L'objectif du TP1 est de développer un programme Python qui utilise au moins 3 
 
 - Le scénario 1: Fiche d'une ligne TPG qui annoncera plusieurs choses 
 - Le scénario 2: 
-- Le scénario 3:
+- Le scénario 3: Quelle ligne desservent le + d'arrets ? 
 - Le scénario 4: 
 - Le scénario 5: 
 
