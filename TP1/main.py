@@ -6,6 +6,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 #to locate json file then read the data et les afficher 
+#here im using the frequentation.json
 fichier = Path (__file__).parent / "data" / "frequentation.json"
 
 with open (fichier,"r", encoding="utf-8") as f:
@@ -52,6 +53,7 @@ racine = arbre.getroot()
 print("\nNombre d'entrées d'arrêts dans le XML :", len(racine))
 
 # Recherche des arrets desservis par la ligne
+#here im using the xml file 
 ligne_xml = ligne_recherchee.zfill(2)
 
 arrets_ligne = []
@@ -68,5 +70,28 @@ print("\nArrêts desservis par la ligne", ligne_recherchee, ":")
 
 for nom in arrets_ligne:
     print("-", nom)
+print("\n")    
 
 print("Nombre d'entrées d'arrêts :", len(arrets_ligne))
+
+#to remove les doublons
+arrets_uniques = set(arrets_ligne)
+
+print("\nNombre d'arrêts distincts :", len(arrets_uniques))
+
+print("\nListe des arrêts distincts :")
+for nom in sorted(arrets_uniques):
+    print("-", nom)
+print("\n")
+
+# Scénario 1 to read the km produits 
+#here im using the third json 
+fichier_km = Path(__file__).parent / "data" / "kilometres.json"
+
+with open(fichier_km, "r", encoding="utf-8") as f:
+    kilometres = json.load(f)
+
+print("\nNombre d'enregistrements kilométriques :", len(kilometres))
+
+print("\nPremier enregistrement :")
+print(kilometres[0])
