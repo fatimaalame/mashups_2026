@@ -61,3 +61,35 @@ Le programme affiche également les noms des arrêts distincts par ordre alphab�
 
 **Particularités des données :** Enfait, les numéros de ligne ne sont pas toujours écrits de la même manière dans les fichiers ("5" en JSON et "05" en XML), ce qui est un problème. Donc j'ai utilisé  "zfill(2)" pour gérer tout ça. Et aussi, le nombre de noms distincts ne correspond pas nécessairement au nombre exact d'arrêts physiques, donc je les ai aussi enlevés (les doublons).
 
+### Scénario 2: Top 5 des arrêts les plus fréquentés d'une ligne TPG
+
+Pour ce deuxième scénario, j'ai décidé de permettre à l'utilisateur de saisir un numéro de ligne et de voir les 5 arrêts où il y a eu le + de montées en 2025.
+
+J'ai du coup combiné 2 fichiers (frequentation.json et arrets.xml) pour :
+
+- Récupérer tous les arrêts de la ligne choisie et additionner leurs montées sur l'année 2025
+- Classer les arrêts du plus fréquenté au moins fréquenté
+- Afficher uniquement les 5 premiers
+- Récupérer les codes des quais de ces arrêts dans le JSON
+- Chercher ces mêmes codes dans le XML pour retrouver leurs coordonnées GPS
+- Signaler les codes qui n'ont pas été retrouvés dans le XML
+
+**Exemple avec la ligne 5 :**
+
+| Rang | Arrêt | Montées en 2025 |
+|---|---|---:|
+| 1 | Gare Cornavin | 1 136 811,64 |
+| 2 | Genève-Aéroport-Terminal | 563 675,37 |
+| 3 | Hôpital | 461 987,32 |
+| 4 | Bel-Air | 456 896,02 |
+| 5 | Coutance | 339 810,30 |
+
+Le programme affiche aussi les codes des quais et leurs coordonnées GPS quand il arrive à les retrouver dans le XML : )
+
+**Attention :** Enfait, les noms des arrêts ne sont pas toujours écrits de la même manière dans le JSON et le XML. Donc au lieu de les comparer directement par leur nom, j'ai utilisé les codes des quais pour faire la correspondance entre les deux fichiers.
+
+Par ex, pour Gare Cornavin, le JSON contient 3 codes : CVIN00, CVIN01 et CVIN03. Mais le programme ne retrouve que CVIN01 et CVIN03 dans le XML. J'ai donc ajouté une vérification pour afficher les codes absents.
+
+Et aussi, comme certains arrêts ont plusieurs quais, ils peuvent avoir plusieurs coordonnées GPS.
+
+Enfin, j'ai testé avec la ligne 9999, qui ne possède aucune donnée de fréquentation en 2025 dans mon fichier. Dans ce cas, le programme affiche simplement un message pour prévenir l'utilisateur au lieu de continuer avec un classement vide.
