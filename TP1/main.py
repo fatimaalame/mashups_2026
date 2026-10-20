@@ -28,7 +28,7 @@ with open(fichier_km, "r", encoding="utf-8") as f:
 ##Début de l'application
 print ("Bienvenue dans TPG open data")
 
-# SCENARIO 1 -> fiche d'une ligne
+############# SCENARIO 1 -> fiche d'une ligne
 def fiche_ligne():
     print("\n--- Recherche d'une ligne TPG ---")
 
@@ -105,7 +105,7 @@ def fiche_ligne():
     print("Total des kilomètres produits en 2025 :", round(total_km, 2))
 
 
-## SCENARIO 2-> Top 5 arrets montés par ligne  
+############ SCENARIO 2-> Top 5 arrets montés par ligne  
 def top_5_arrets():
     print("\n--- Top 5 des arrêts les plus fréquentés ---")
 
@@ -130,14 +130,14 @@ def top_5_arrets():
         print("Aucune donnée de fréquentation trouvée pour cette ligne en 2025.")
         return 
 
-    # Trier les arrêts selon le nombre de montées
+    #to sort les arrêts selon le nombre de montées
     classement = sorted(
         montees_par_arret.items(), #.items = récupère les couples (nom, montées) du dico
         key=lambda element: element[1], #lamba = fct sans nom qui indique à sorted quelle val utiliser pr effectuer tri
         reverse=True #trie du + grd au + petit
     )
 
-    # Afficher uniquement les 5 premiers
+    #to show uniquement les 5 premiers
     print("\nTop 5 des arrêts de la ligne", ligne_recherchee)
 
     for nom, montees in classement[:5]: #conserve only first 5
@@ -157,7 +157,7 @@ def top_5_arrets():
 
         print(nom, ":", sorted(codes))
         
-        #Chercher les coordonnées dans le XML
+        #to search les coordonnées dans le XML
         for arret in racine.findall("arret"):
             code_xml = arret.findtext("code")
 
@@ -168,7 +168,7 @@ def top_5_arrets():
 
                 print("  Quai", code_xml, ":", latitude, longitude)
 
-        #Afficher les codes absents du XML
+        #pr afficher les codes absents du XML
         codes_manquants = codes - codes_trouves
         if codes_manquants:
             print("  Codes absents du XML :", sorted(codes_manquants))               

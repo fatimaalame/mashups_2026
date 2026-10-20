@@ -74,7 +74,7 @@ J'ai du coup combiné 2 fichiers (frequentation.json et arrets.xml) pour :
 - Chercher ces mêmes codes dans le XML pour retrouver leurs coordonnées GPS
 - Signaler les codes qui n'ont pas été retrouvés dans le XML
 
-**Exemple avec la ligne 5 :**
+**Toujours un exemple avec la ligne 5 :**
 
 | Rang | Arrêt | Montées en 2025 |
 |---|---|---:|
