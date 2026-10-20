@@ -1,5 +1,5 @@
-# mashups_2026
-Practical assignments for the Mashups and Contextualisation course
+# Mashups 2026
+Practical assignments for the Mashups and Contextualisation  
 
 J'aimerai créer un programme python utilisable dans le terminal qui combine des données sur les arrêts, la fréquentation et les kilomètres parcourus du réseau TPG etc...
 
@@ -8,7 +8,7 @@ J'aimerai créer un programme python utilisable dans le terminal qui combine des
 ### Présentation du projet
 L'objectif du TP1 est de développer un programme Python qui utilise au moins 3 fichiers de données distincts (dont au moins un JSON et un XML). J'ai pour ceci choisi d'aller chercher dans les bases de données OpenData des Transports publics genevois (TPG). Mon objectif est de pouvoir analyser les lignes du réseaux à partir des arrêts desservis, de la fréquentation des voyageurs et des km produits. Nous sommes aussi censé présenter 5 scénarios différents et une interface minimale qui s'affiche dans le terminal de l'IDE actuel. 
 
-- Le scénario 1: Fiche d'une ligne TPG qui annoncera !!!!! JSP  !!!!!!
+- Le scénario 1: Fiche d'une ligne TPG qui annoncera plusieurs choses 
 - Le scénario 2: 
 - Le scénario 3:
 - Le scénario 4: 
