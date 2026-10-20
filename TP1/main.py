@@ -84,7 +84,7 @@ for nom in sorted(arrets_uniques):
     print("-", nom)
 print("\n")
 
-# Scénario 1 to read the km produits 
+#Scénario 1 to read the km produits 
 #here im using the third json 
 fichier_km = Path(__file__).parent / "data" / "kilometres.json"
 
@@ -95,3 +95,21 @@ print("\nNombre d'enregistrements kilométriques :", len(kilometres))
 
 print("\nPremier enregistrement :")
 print(kilometres[0])
+
+#here im only looking for the km produits back in 2025
+resultats_km = []
+
+for enregistrement in kilometres:
+    if (enregistrement["ligne"] == ligne_recherchee
+            and enregistrement["date"].startswith("2025-")):
+        resultats_km.append(enregistrement)
+
+print("\nNombre d'enregistrements kilométriques trouvés :", len(resultats_km))
+
+#Calcul du total des km produits
+total_km = 0
+
+for enregistrement in resultats_km:
+    total_km += enregistrement["km_prod"]
+
+print("Total des kilomètres produits en 2025 :", round(total_km, 2))
