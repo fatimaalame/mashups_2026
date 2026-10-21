@@ -26,6 +26,11 @@ L'objectif du TP1 est de développer un programme Python qui utilise au moins 3 
 
 Pour faciliter et limiter les données, j'ai décidé que les calculs de fréquentation et de kilomètres sont effectués sur les données uniquement sur l'année 2025.
 
+Sources de mes données: 
+1. Pour les arrêts en XML/KML: https://opendata.swiss/fr/dataset/reseau-tpg-arrets1?sort=title-asc
+2. Pour les fréquentations en 2025 en JSON: https://opendata.tpg.ch/explore/dataset/montees-mensuelles-par-arret-par-ligne/table/?disjunctive.ligne&disjunctive.ligne_type_act&disjunctive.arret&disjunctive.arret_code_long
+3. Pour les km produits journaliers par ligne en 2025: https://opendata.tpg.ch/explore/dataset/kilometres-produits-journaliers-par-ligne/export/?disjunctive.ligne&disjunctive.ligne_type_act&disjunctive.horaire_type&disjunctive.jour_semaine&sort=date&refine.date=2025
+
 ### Comment executer ? 
 
 Le programme utilise Python 3 et uniquement des bibliothèques standard (json, pathlib, xml.etree.ElementTree).
@@ -117,10 +122,6 @@ J'ai combiné 2 fichiers (arrets.xml et frequentation.json) pour :
 | 07 | 33 | 5 296 553,26 |
 | 09 | 33 | 7 162 498,39 |
 
-Le programme a trouvé 91 lignes différentes dans le XML, mais j'ai décidé d'afficher uniquement les 10 premières pour que le résultat soit plus lisible dans le terminal : )
+Le programme a trouvé 91 lignes différentes dans le XML, mais j'ai décidé d'afficher uniquement les 10 premières pour que le résultat soit plus lisible dans le terminal
 
-**Particularités des données :** Comme dans le scénario 1, les numéros de ligne ne sont pas toujours écrits de la même manière dans les deux fichiers. J'ai donc utilisé zfill(2) pour pouvoir comparer les numéros du JSON avec ceux du XML.
-
-J'ai aussi remarqué que certaines lignes présentes dans le XML n'ont pas forcément de données de fréquentation correspondantes dans le JSON. Par exemple, la ligne A possède 37 noms d'arrêts distincts, mais aucune donnée de montées n'a été retrouvée pour 2025. Au lieu d'afficher 0, ce qui pourrait laisser penser que personne n'a utilisé cette ligne, j'ai préféré afficher "Données de fréquentation indisponibles".
-
-Et enfin, les arrêts sont comptés à partir de leurs noms distincts. Cela ne correspond donc pas forcément au nombre exact d'arrêts physiques du réseau.
+**Particularités des données :** Comme dans le scénario 1, les numéros de ligne ne sont pas toujours écrits de la même manière dans les deux fichiers. J'ai donc utilisé zfill(2) pour pouvoir comparer les numéros du JSON avec ceux du XML. J'ai aussi remarqué que certaines lignes présentes dans le XML n'ont pas forcément de données de fréquentation correspondantes dans le JSON. Par exemple, la ligne A possède 37 noms d'arrêts distincts, mais aucune donnée de montées n'a été retrouvée pour 2025. Au lieu d'afficher 0, ce qui pourrait laisser penser que personne n'a utilisé cette ligne, j'ai préféré afficher "Données de fréquentation indisponibles". Finally, les arrêts sont comptés à partir de leurs noms distincts. Cela ne correspond donc pas forcément au nombre exact d'arrêts physiques du réseau.
