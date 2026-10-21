@@ -229,4 +229,35 @@ def classement_lignes():
             frequentation_texte
         )
 
-classement_lignes()       
+############ SCENARIO 4 -> Vacances vs horaires normaux
+def comparaison_horaires():
+    print("\n--- Comparaison des horaires TPG ---")
+
+    ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
+
+    km_vacances = [] #2 list vides 
+    km_normal = []
+
+    for enregistrement in kilometres: #on parcourt mon fichier json km
+        if (enregistrement["ligne"] == ligne_recherchee
+                and enregistrement["date"].startswith("2025-")):
+
+            if enregistrement["horaire_type"] == "VACANCES":
+                km_vacances.append(enregistrement["km_prod"])
+
+            elif enregistrement["horaire_type"] == "NORMAL":
+                km_normal.append(enregistrement["km_prod"])
+
+    print("Enregistrements VACANCES :", len(km_vacances))
+    print("Enregistrements NORMAL :", len(km_normal)) #compte le nombre de val saved in every list
+
+    if km_vacances and km_normal:
+        moyenne_vacances = sum(km_vacances) / len(km_vacances)
+        moyenne_normal = sum(km_normal) / len(km_normal)
+
+        print("\nMoyenne VACANCES :", round(moyenne_vacances, 2), "km")
+        print("Moyenne NORMAL :", round(moyenne_normal, 2), "km")
+    else:
+        print("Pas assez de données pour comparer les horaires.")
+        
+comparaison_horaires()    
