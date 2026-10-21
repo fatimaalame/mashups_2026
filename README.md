@@ -125,3 +125,25 @@ J'ai combiné 2 fichiers (arrets.xml et frequentation.json) pour :
 Le programme a trouvé 91 lignes différentes dans le XML, mais j'ai décidé d'afficher uniquement les 10 premières pour que le résultat soit plus lisible dans le terminal
 
 **Particularités des données :** Comme dans le scénario 1, les numéros de ligne ne sont pas toujours écrits de la même manière dans les deux fichiers. J'ai donc utilisé zfill(2) pour pouvoir comparer les numéros du JSON avec ceux du XML. J'ai aussi remarqué que certaines lignes présentes dans le XML n'ont pas forcément de données de fréquentation correspondantes dans le JSON. Par exemple, la ligne A possède 37 noms d'arrêts distincts, mais aucune donnée de montées n'a été retrouvée pour 2025. Au lieu d'afficher 0, ce qui pourrait laisser penser que personne n'a utilisé cette ligne, j'ai préféré afficher "Données de fréquentation indisponibles". Finally, les arrêts sont comptés à partir de leurs noms distincts. Cela ne correspond donc pas forcément au nombre exact d'arrêts physiques du réseau.
+
+### Scénario 4: Comparaison des horaires VACANCES et NORMAL
+
+Pour ce 4eme scénario, je voulais voir s'il y avait une vraie différence entre les kilomètres produits pendant les jours avec un horaire normal et ceux avec un horaire vacances. Parce qu'en soit, on pourrait imaginer que les TPG font moins de kilomètres pendant les vacances, mais est-ce que c'est vraiment le cas ? Et surtout, de combien ?
+
+J'ai donc utilisé 2 fichiers (kilometres.json et frequentation.json) pour pouvoir comparer tout ça. En gros, le programme permet à l'utilisateur de choisir une ligne, puis il va chercher les kilomètres produits en 2025. Ensuite, j'ai séparé les données en deux catégories, VACANCES et NORMAL, pour calculer la moyenne des kilomètres produits pour chacune. Au début, je pensais simplement comparer le total des kilomètres, mais enfait ça n'aurait pas été très représentatif, parce qu'il n'y a pas le même nombre de jours dans les deux catégories. Donc j'ai plutôt décidé de calculer une moyenne par jour et ensuite de regarder la différence en pourcentage.
+
+**Par ex avec les lignes 5 et 1 :**
+
+| Indicateur | Ligne 5 | Ligne 1 |
+|---|---:|---:|
+| Jours VACANCES | 63 | 63 |
+| Jours NORMAL | 190 | 190 |
+| Moyenne VACANCES | 2 101,70 km | 2 126,95 km |
+| Moyenne NORMAL | 2 748,39 km | 2 716,78 km |
+| Différence | 646,69 km | 589,83 km |
+| Diminution | 23,53 % | 21,71 % |
+| Montées en 2025 | 6 375 036,69 | 6 892 915,82 |
+
+Ce que je trouve intéressant, c'est que pour les deux lignes que j'ai testées, on voit une diminution des kilomètres produits pendant les jours VACANCES. Pour la ligne 5, par exemple, c'est environ 23,53 % de moins que pendant les jours NORMAL. Je pensais qu'il y aurait une différence, mais je ne savais pas qu'elle serait aussi importante. J'ai aussi décidé d'afficher le nombre total des montées en 2025 à partir de frequentation.json, histoire d'avoir une information supplémentaire sur la fréquentation de la ligne. Par contre, ça ne veut pas dire que les voyageurs diminuent de 23,53 % pendant les vacances ! Les données de fréquentation concernent toute l'année, alors que le pourcentage concerne uniquement les kilomètres produits.
+
+**Particularités des données :** Enfait, j'ai remarqué que le fichier kilometres.json ne contient pas uniquement les catégories VACANCES et NORMAL. Par exemple, pour la ligne 5, il y a 365 enregistrements en 2025, mais seulement 253 correspondent aux deux types d'horaires que j'ai décidé de comparer. Les autres ne sont donc pas pris en compte ici. J'ai également vérifié les dates pour être sûre de ne pas compter plusieurs fois le même jour. Pour les deux lignes testées, chaque enregistrement VACANCES et NORMAL correspond bien à un jour différent, ce qui permet de parler de moyenne quotidienne.Enfin, j'ai testé les lignes 5 et 1 pour voir si le programme fonctionnait avec plusieurs lignes, et les résultats correspondent aussi aux calculs de fréquentation que j'avais obtenus dans les scénarios précédents 
