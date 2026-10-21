@@ -25,8 +25,37 @@ fichier_km = Path(__file__).parent / "data" / "kilometres.json"
 with open(fichier_km, "r", encoding="utf-8") as f:
     kilometres = json.load(f)
 
-##Début de l'application
-print ("Bienvenue dans TPG open data")
+############ INTERFACE -> Menu principal
+def menu():
+    print("\n  TPG OPEN DATA   ")
+    print("\nQue souhaitez-vous faire ?")
+    print("1. Fiche d'une ligne TPG")
+    print("2. Top 5 des arrêts les plus fréquentés")
+    print("3. Top 10 des lignes avec le plus d'arrêts")
+    print("4. Comparaison des horaires VACANCES / NORMAL")
+    print("5. Arrêts stratégiques du réseau")
+
+    choix = input("\nVotre choix : ").strip()
+
+    if choix == "1":
+        fiche_ligne()
+
+    elif choix == "2":
+        top_5_arrets()
+
+    elif choix == "3":
+        classement_lignes()
+
+    elif choix == "4":
+        comparaison_horaires()
+
+    elif choix == "5":
+        print("Ce scénario n'est pas encore disponible.")
+
+    else:
+        print("Choix invalide. Veuillez réessayer.")
+
+menu()
 
 ############# SCENARIO 1 -> fiche d'une ligne
 def fiche_ligne():
@@ -259,5 +288,3 @@ def comparaison_horaires():
         print("Moyenne NORMAL :", round(moyenne_normal, 2), "km")
     else:
         print("Pas assez de données pour comparer les horaires.")
-        
-comparaison_horaires()    
