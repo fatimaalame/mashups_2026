@@ -276,6 +276,22 @@ def comparaison_horaires():
             elif enregistrement["horaire_type"] == "NORMAL":
                 km_normal.append(enregistrement["km_prod"])
 
+        dates_vacances = set()
+    dates_normal = set()
+
+    for enregistrement in kilometres:
+        if (enregistrement["ligne"] == ligne_recherchee
+                and enregistrement["date"].startswith("2025-")):
+
+            if enregistrement["horaire_type"] == "VACANCES":
+                dates_vacances.add(enregistrement["date"])
+
+            elif enregistrement["horaire_type"] == "NORMAL":
+                dates_normal.add(enregistrement["date"])
+
+    print("Jours distincts VACANCES :", len(dates_vacances))
+    print("Jours distincts NORMAL :", len(dates_normal))
+
     print("Enregistrements VACANCES :", len(km_vacances))
     print("Enregistrements NORMAL :", len(km_normal)) #compte le nombre de val saved in every list
 
@@ -285,8 +301,28 @@ def comparaison_horaires():
 
         print("\nMoyenne VACANCES :", round(moyenne_vacances, 2), "km")
         print("Moyenne NORMAL :", round(moyenne_normal, 2), "km")
+
+        # Calculer la différence entre les deux moyennes
+        difference = moyenne_normal - moyenne_vacances
+
+        # Calculer le pourcentage de diminution
+        pourcentage = (difference / moyenne_normal) * 100
+
+        print("Différence :", round(difference, 2), "km")
+        print("Diminution par rapport à NORMAL :", round(pourcentage, 2), "%")
+
     else:
         print("Pas assez de données pour comparer les horaires.")
 
+        # Récupérer les montées de 2025 depuis frequentation.json
+    total_montees = 0
 
+    for enregistrement in frequentation:
+        if (enregistrement["ligne"] == ligne_recherchee
+                and enregistrement["annee"] == "2025"):
+
+            total_montees += enregistrement["nb_de_montees"]
+
+    print("Total des montées en 2025 :", round(total_montees, 2))
+    
 menu()
