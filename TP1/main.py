@@ -55,7 +55,6 @@ def menu():
     else:
         print("Choix invalide. Veuillez réessayer.")
 
-menu()
 
 ############# SCENARIO 1 -> fiche d'une ligne
 def fiche_ligne():
@@ -288,3 +287,6 @@ def comparaison_horaires():
         print("Moyenne NORMAL :", round(moyenne_normal, 2), "km")
     else:
         print("Pas assez de données pour comparer les horaires.")
+
+
+menu()
