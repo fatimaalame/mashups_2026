@@ -27,38 +27,39 @@ with open(fichier_km, "r", encoding="utf-8") as f:
 
 ############ INTERFACE -> Menu principal
 def menu():
-    print("\n  TPG OPEN DATA   ")
-    print("\nQue souhaitez-vous faire ?")
-    print("1. Fiche d'une ligne TPG")
-    print("2. Top 5 des arrêts les plus fréquentés")
-    print("3. Top 10 des lignes avec le plus d'arrêts")
-    print("4. Comparaison des horaires VACANCES / NORMAL")
-    print("5. Arrêts stratégiques du réseau")
+    while True :
+        print("\n  TPG OPEN DATA    \n")
+        print("Que souhaitez-vous faire ?")
+        print("1. Fiche d'une ligne TPG")
+        print("2. Top 5 des arrêts les plus fréquentés")
+        print("3. Top 10 des lignes avec le plus d'arrêts")
+        print("4. Comparaison des horaires VACANCES / NORMAL")
+        print("5. Recherche d'un arrêt TPG")
 
-    choix = input("\nVotre choix : ").strip()
+        choix = input("\nVotre choix : ").strip()
 
-    if choix == "1":
-        fiche_ligne()
+        if choix == "1":
+            fiche_ligne()
 
-    elif choix == "2":
-        top_5_arrets()
+        elif choix == "2":
+            top_5_arrets()
 
-    elif choix == "3":
-        classement_lignes()
+        elif choix == "3":
+            classement_lignes()
 
-    elif choix == "4":
-        comparaison_horaires()
+        elif choix == "4":
+            comparaison_horaires()
 
-    elif choix == "5":
-        print("Ce scénario n'est pas encore disponible.")
+        elif choix == "5":
+            recherche_arret()
 
-    else:
-        print("Choix invalide. Veuillez réessayer.")
-
+        else:
+            print("Choix invalide. Veuillez réessayer.")
+            break
 
 ############# SCENARIO 1 -> fiche d'une ligne
 def fiche_ligne():
-    print("\n--- Recherche d'une ligne TPG ---")
+    print("\n    Recherche d'une ligne TPG    \n")
 
     ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
     resultats = []
@@ -135,7 +136,7 @@ def fiche_ligne():
 
 ############ SCENARIO 2-> Top 5 arrets montés par ligne  
 def top_5_arrets():
-    print("\n--- Top 5 des arrêts les plus fréquentés ---")
+    print("\n   Top 5 des arrêts les plus fréquentés   \n")
 
     ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
 
@@ -203,7 +204,7 @@ def top_5_arrets():
 
 ############ SCENARIO 3 -> Classement des lignes par nombre d'arrêts
 def classement_lignes():
-    print("\n--- Classement des lignes TPG ---")
+    print("\n   Classement des lignes TPG   \n")
 
     arrets_par_ligne = {}
 
@@ -259,7 +260,7 @@ def classement_lignes():
 
 ############ SCENARIO 4 -> Vacances vs horaires normaux
 def comparaison_horaires():
-    print("\n--- Comparaison des horaires TPG ---")
+    print("\n  Comparaison des horaires TPG  \n")
 
     ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
 
@@ -324,5 +325,53 @@ def comparaison_horaires():
             total_montees += enregistrement["nb_de_montees"]
 
     print("Total des montées en 2025 :", round(total_montees, 2))
-    
+
+
+############ SCENARIO 5 -> Recherche d'un arrêt TPG
+def recherche_arret():
+    print("\n--- Recherche d'un arrêt TPG ---\n")
+
+    nom_recherche = input("Entrez le nom d'un arrêt : ").strip().lower()
+
+    arrets_trouves = []
+
+    for arret in racine.findall("arret"):
+        nom = arret.findtext("nom")
+
+        if nom and nom_recherche in nom.lower():
+            arrets_trouves.append(arret)
+
+    print("Nombre d'entrées trouvées :", len(arrets_trouves))
+    if not arrets_trouves:
+        print("\nAucun arrêt trouvé avec ce nom.")
+        print("\n")
+        return
+
+    lignes_trouvees = set()
+    codes_trouves = set ()
+
+    for arret in arrets_trouves:
+        nom = arret.findtext("nom")
+        code = arret.findtext("code")
+        codes_trouves.add(code)
+
+        latitude = arret.findtext("coordonnees/latitude")
+        longitude = arret.findtext("coordonnees/longitude")
+
+        print("\nArrêt :", nom)
+        print("Quai :", code)
+        print("Coordonnées :", latitude, longitude)
+
+        for ligne in arret.findall("lignes/ligne"):
+            lignes_trouvees.add(ligne.text)
+
+    print("\nLignes desservant cet arrêt :", sorted(lignes_trouvees))
+    total_montees = 0
+
+    for enregistrement in frequentation:
+        if (enregistrement["arret_code_long"] in codes_trouves
+                and enregistrement["annee"] == "2025"):
+            total_montees += enregistrement["nb_de_montees"]
+
+    print("Total des montées en 2025 :", round(total_montees, 2))
 menu()
