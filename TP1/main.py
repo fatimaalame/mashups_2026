@@ -57,7 +57,7 @@ def menu():
             print("Choix invalide. Veuillez réessayer.")
             break
 
-############# SCENARIO 1 -> fiche d'une ligne
+##SCENARIO 1 -> fiche d'une ligne
 def fiche_ligne():
     print("\n    Recherche d'une ligne TPG    \n")
 
@@ -134,7 +134,7 @@ def fiche_ligne():
     print("Total des kilomètres produits en 2025 :", round(total_km, 2))
 
 
-############ SCENARIO 2-> Top 5 arrets montés par ligne  
+##SCENARIO 2-> Top 5 arrets montés par ligne  
 def top_5_arrets():
     print("\n   Top 5 des arrêts les plus fréquentés   \n")
 
@@ -202,7 +202,7 @@ def top_5_arrets():
         if codes_manquants:
             print("  Codes absents du XML :", sorted(codes_manquants))               
 
-############ SCENARIO 3 -> Classement des lignes par nombre d'arrêts
+##CENARIO 3 -> Classement des lignes par nombre d'arrêts
 def classement_lignes():
     print("\n   Classement des lignes TPG   \n")
 
@@ -258,7 +258,7 @@ def classement_lignes():
             frequentation_texte
         )
 
-############ SCENARIO 4 -> Vacances vs horaires normaux
+##SCENARIO 4 -> Vacances vs horaires normaux
 def comparaison_horaires():
     print("\n  Comparaison des horaires TPG  \n")
 
@@ -327,7 +327,7 @@ def comparaison_horaires():
     print("Total des montées en 2025 :", round(total_montees, 2))
 
 
-############ SCENARIO 5 -> Recherche d'un arrêt TPG
+##SCENARIO 5 -> Recherche d'un arrêt TPG
 def recherche_arret():
     print("\n--- Recherche d'un arrêt TPG ---\n")
 
