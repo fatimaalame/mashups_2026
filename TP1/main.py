@@ -344,9 +344,12 @@ def comparaison_horaires():
 
 ##SCENARIO 5 -> Recherche d'un arrêt TPG
 def recherche_arret():
-    print("\n--- Recherche d'un arrêt TPG ---\n")
+    print("    Recherche d'un arrêt TPG    ")
 
     nom_recherche = input("Entrez le nom d'un arrêt : ").strip().lower()
+    if not nom_recherche:
+        print("Veuillez saisir un nom d'arrêt.")
+        return
 
     arrets_trouves = []
 
