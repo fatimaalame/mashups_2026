@@ -172,3 +172,44 @@ Pour cet exemple, j'ai choisi l'arrêt Battelle, histoire de rester dans le thè
 **Particularités des données :**
 
 J'ai remarqué que les noms des arrêts ne sont pas forcément écrits de la même manière dans le JSON et dans le XML. Du coup, pour faire la correspondance entre les deux fichiers, j'ai utilisé les codes des quais plutôt que les noms. J'ai aussi prévu le cas où l'utilisateur recherche un arrêt qui n'existe pas, ou ne saisit aucun nom. Dans ce cas, le programme affiche un message et revient au menu principal au lieu de continuer avec des résultats vides. Enfin, la recherche fonctionne même si l'utilisateur n'écrit pas exactement le nom complet de l'arrêt. Par exemple, écrire « Battelle » permet de retrouver « Carouge GE, Battelle ». Par contre, si la recherche est trop générale, le programme peut retrouver plusieurs arrêts différents et additionner leurs montées.
+
+
+
+
+### Conclusion
+Ce TP m’a permis de comprendre que la diﬃculté ne réside pas uniquement dans la
+programmation, mais aussi dans la manière dont on exploite et interprète les données. En
+travaillant avec trois sources diﬀérentes, j’ai été confrontée à plusieurs problèmes de
+correspondance, de cohérence et de traitement des données. J’ai notamment appris qu’obtenir
+un résultat ne suﬃt pas. Encore faut-il comprendre ce qu’il représente et s’assurer qu’il est
+pertinent. Au-delà des cinq scénarios réalisés, ce projet m’a surtout appris à questionner mes
+résultats, à identifier mes erreurs et à améliorer progressivement mon programme. Finalement, ce
+que je retiens de ce TP, c’est qu’un programme qui fonctionne n’est pas nécessairement un
+programme qui donne du sens aux données. Et c’est justement cette distinction qui m’a le plus
+appris.
+
+### Utilisation d'un LLM
+J'ai utilisé les LLMs pour m'aider à comprendre et combiner mes fichiers JSON et XML, corriger mes
+erreurs Python (et il y en a eu pas mal !), vérifier mes résultats et m'assurer que mes solutions
+correspondaient au niveau attendu pour ce TP. Elle m'a aussi beaucoup aidée à structurer et
+reformuler ma documentation, notamment le README et certaines parties de ce rapport, tout en
+gardant mes propres explications et observations. J'ai tenu à eﬀectuer les corrections moi-même,
+étape par étape pour comprendre ce que je faisais plutôt que de simplement reprendre du code
+généré. Les outils que j’ai utilisé sont GPT-5.5 Thinking (OpenAI) et Claude Sonnet 5.5 (Anthropic).
+
+### Sources utilisées pour le main.py
+- Documentation du module JSON: https://docs.python.org/fr/3/library/json.html [consulté le
+24.10.26]
+- Documentation du module ElementTree: https://docs.python.org/fr/3/library/
+xml.etree.elementtree.html [consulté le 24.10.26]
+- Pour la structure de données: https://docs.python.org/fr/3/tutorial/datastructures.html [consulté
+[24.10.26]
+- Pour le path: https://docs.python.org/fr/3/library/pathlib.html [consulté le 24.10.26]
+- Pour les fonctions pour mes chaines de caractères: https://docs.python.org/fr/3/library/
+stdtypes.html#text-sequence-type-str [consulté le 24.10.26]
+- Pour les fichiers XML: https://docs.python.org/fr/3/library/xml.etree.elementtree.html [consulté
+le 25.10.26]
+- Pour la normalisation: https://www.geeksforgeeks.org/python/python-string-zfill/ [consulté le
+27.10.26]
+- Pour le set ( ) : https://www.geeksforgeeks.org/python/python-set-function/ [consulté le
+27.10.26]
