@@ -69,7 +69,7 @@ def menu():
 def fiche_ligne():
     print("\n    Recherche d'une ligne TPG    \n")
 
-    ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
+    ligne_recherchee = normaliser_ligne(input("Entrez un numéro de ligne: "))
     resultats = []
 
     #pr le nombre d'enregistrements trouvés
@@ -146,7 +146,7 @@ def fiche_ligne():
 def top_5_arrets():
     print("\n   Top 5 des arrêts les plus fréquentés   \n")
 
-    ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
+    ligne_recherchee = normaliser_ligne(input("Entrez un numéro de ligne: "))
 
     montees_par_arret = {}
 
@@ -272,7 +272,7 @@ def classement_lignes():
 def comparaison_horaires():
     print("\n  Comparaison des horaires TPG  \n")
 
-    ligne_recherchee = input("Entrez un numéro de ligne: ").strip()
+    ligne_recherchee = normaliser_ligne(input("Entrez un numéro de ligne: "))
 
     km_vacances = [] #2 list vides 
     km_normal = []
