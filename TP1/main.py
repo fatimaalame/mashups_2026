@@ -245,7 +245,7 @@ def classement_lignes():
 
     for enregistrement in frequentation: #parcourt ts les enre du json
         if enregistrement["annee"] == "2025":
-            numero = enregistrement["ligne"].zfill(2) #we only keep yr 2025 
+            numero = normaliser_ligne(enregistrement["ligne"]) #we only keep yr 2025 
 
             if numero not in montees_par_ligne:
                 montees_par_ligne[numero] = 0
