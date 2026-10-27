@@ -33,11 +33,19 @@ Sources de mes données:
 
 ### Comment executer ? 
 
-Le programme utilise Python 3 et uniquement des bibliothèques standard (json, pathlib, xml.etree.ElementTree).
+### Comment exécuter ?
 
-Depuis le dossier TP1, exécuter sur votre IDE :
+Pour lancer mon programme, il faut juste avoir Python 3 installé. J'ai utilisé uniquement des bibliothèques déjà incluses dans Python, donc normalement il n'y a rien d'autre à installer :)
 
-->    python3 main.py
+D'abord, récupérer mon projet sur GitHub : git clone https://github.com/fatimaalame/mashups_2026.git
+
+Puis aller dans le dossier TP1 : cd mashups_2026/TP1
+
+Et enfin lancer : python3 main.py
+
+Là, le menu apparaîtra et il suffira de choisir entre le chiffre 1 et 5 pour tester les différents scénarios. 
+(P.s: Les trois fichiers de données sont déjà dans le sous-dossier data, donc pas besoin de télécharger quoi que ce soit d’autre.) 
+
 
 ### Scénario 1: Fiche d'une ligne TPG
 
