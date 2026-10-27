@@ -276,23 +276,28 @@ def comparaison_horaires():
 
     km_vacances = [] #2 list vides 
     km_normal = []
+    km_par_jour = {"VACANCES": {}, "NORMAL": {}}
 
     for enregistrement in kilometres: #on parcourt mon fichier json km
-        if (enregistrement["ligne"] == ligne_recherchee
-                and enregistrement["date"].startswith("2025-")):
+        if (normaliser_ligne(enregistrement["ligne"]) == ligne_recherchee
+            and enregistrement["date"].startswith("2025-")):
 
             if enregistrement["horaire_type"] == "VACANCES":
                 km_vacances.append(enregistrement["km_prod"])
+                jour = enregistrement["date"]
+                km_par_jour["VACANCES"][jour] = km_par_jour["VACANCES"].get(jour, 0) + enregistrement["km_prod"]
 
             elif enregistrement["horaire_type"] == "NORMAL":
                 km_normal.append(enregistrement["km_prod"])
+                jour = enregistrement["date"]
+                km_par_jour["NORMAL"][jour] = km_par_jour["NORMAL"].get(jour, 0) + enregistrement["km_prod"]
 
-        dates_vacances = set()
+    dates_vacances = set()
     dates_normal = set()
 
     for enregistrement in kilometres:
-        if (enregistrement["ligne"] == ligne_recherchee
-                and enregistrement["date"].startswith("2025-")):
+        if (normaliser_ligne(enregistrement["ligne"]) == ligne_recherchee
+            and enregistrement["date"].startswith("2025-")):
 
             if enregistrement["horaire_type"] == "VACANCES":
                 dates_vacances.add(enregistrement["date"])
@@ -307,8 +312,8 @@ def comparaison_horaires():
     print("Enregistrements NORMAL :", len(km_normal)) #compte le nombre de val saved in every list
 
     if km_vacances and km_normal:
-        moyenne_vacances = sum(km_vacances) / len(km_vacances)
-        moyenne_normal = sum(km_normal) / len(km_normal)
+        moyenne_vacances = sum(km_par_jour["VACANCES"].values()) / len(km_par_jour["VACANCES"])
+        moyenne_normal = sum(km_par_jour["NORMAL"].values()) / len(km_par_jour["NORMAL"])
 
         print("\nMoyenne VACANCES :", round(moyenne_vacances, 2), "km")
         print("Moyenne NORMAL :", round(moyenne_normal, 2), "km")
@@ -329,8 +334,8 @@ def comparaison_horaires():
     total_montees = 0
 
     for enregistrement in frequentation:
-        if (enregistrement["ligne"] == ligne_recherchee
-                and enregistrement["annee"] == "2025"):
+        if (normaliser_ligne(enregistrement["ligne"]) == ligne_recherchee
+            and enregistrement["annee"] == "2025"):
 
             total_montees += enregistrement["nb_de_montees"]
 
