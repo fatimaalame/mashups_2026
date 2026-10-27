@@ -63,7 +63,7 @@ def menu():
 
         else:
             print("Choix invalide. Veuillez réessayer.")
-            break
+            
 
 ##SCENARIO 1 -> fiche d'une ligne
 def fiche_ligne():
@@ -98,17 +98,14 @@ def fiche_ligne():
 
     #recherche des arrets desservis par la ligne
     #here im using the xml file 
-    ligne_xml = ligne_recherchee.zfill(2)
-
     arrets_ligne = []
 
     for arret in racine.findall("arret"):
         lignes = arret.findall("lignes/ligne")
 
         for ligne in lignes:
-            if ligne.text == ligne_xml:
-                arrets_ligne.append(arret.findtext("nom"))
-                break
+            if normaliser_ligne(ligne.text) == ligne_recherchee:                        arrets_ligne.append(arret.findtext("nom"))
+            break
   
 
     print("Nombre d'entrées d'arrêts :", len(arrets_ligne))
@@ -211,7 +208,7 @@ def top_5_arrets():
             print("  Codes absents du XML :", sorted(codes_manquants))               
 
 
-##CENARIO 3 -> Classement des lignes par nombre d'arrêts
+##SCENARIO 3 -> Classement des lignes par nombre d'arrêts
 def classement_lignes():
     print("\n   Classement des lignes TPG   \n")
 
