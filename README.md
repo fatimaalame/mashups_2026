@@ -115,7 +115,7 @@ J'ai combiné 2 fichiers (arrets.xml et frequentation.json) pour :
 | 54 | 43 | 252 972,95 |
 | 38 | 43 | 720 297,71 |
 | 05 | 39 | 6 375 036,69 |
-| A | 37 | Données indisponibles |
+| A | 37 | 1 116 000,14 |
 | 83 | 35 | 242 246,12 |
 | 60 | 35 | 3 180 404,82 |
 | 07 | 33 | 5 296 553,26 |
@@ -146,3 +146,27 @@ J'ai donc utilisé 2 fichiers (kilometres.json et frequentation.json) pour pouvo
 Ce que je trouve intéressant, c'est que pour les deux lignes que j'ai testées, on voit une diminution des kilomètres produits pendant les jours VACANCES. Pour la ligne 5, par exemple, c'est environ 23,53 % de moins que pendant les jours NORMAL. Je pensais qu'il y aurait une différence, mais je ne savais pas qu'elle serait aussi importante. J'ai aussi décidé d'afficher le nombre total des montées en 2025 à partir de frequentation.json, histoire d'avoir une information supplémentaire sur la fréquentation de la ligne. Par contre, ça ne veut pas dire que les voyageurs diminuent de 23,53 % pendant les vacances ! Les données de fréquentation concernent toute l'année, alors que le pourcentage concerne uniquement les kilomètres produits.
 
 **Particularités des données :** Enfait, j'ai remarqué que le fichier kilometres.json ne contient pas uniquement les catégories VACANCES et NORMAL. Par exemple, pour la ligne 5, il y a 365 enregistrements en 2025, mais seulement 253 correspondent aux deux types d'horaires que j'ai décidé de comparer. Les autres ne sont donc pas pris en compte ici. J'ai également vérifié les dates pour être sûre de ne pas compter plusieurs fois le même jour. Pour les deux lignes testées, chaque enregistrement VACANCES et NORMAL correspond bien à un jour différent, ce qui permet de parler de moyenne quotidienne.Enfin, j'ai testé les lignes 5 et 1 pour voir si le programme fonctionnait avec plusieurs lignes, et les résultats correspondent aussi aux calculs de fréquentation que j'avais obtenus dans les scénarios précédents 
+
+
+### Scénario 5 : Recherche d'un arrêt TPG
+Pour ce dernier scénario, j'ai voulu faire un peu l'inverse du scénario 1. Au lieu de chercher une ligne TPG et de voir quels arrêts elle dessert, je voulais permettre à l'utilisateur de rechercher directement un arrêt par son nom et d'obtenir des informations dessus. J'ai donc combiné 2 fichiers (arrets.xml et frequentation.json). Le programme cherche d'abord le nom de l'arrêt dans le XML, puis affiche les différents quais, leurs coordonnées GPS et les lignes qui les desservent. Ensuite, il utilise les codes des quais pour retrouver dans le JSON le total des montées en 2025, toutes lignes confondues.
+
+**Exemple avec l'arrêt Guye :**
+
+| Indicateur | Résultat |
+|---|---|
+| Arrêt trouvé | Genève, Guye |
+| Nombre de quais | 2 |
+| Codes des quais | GUYE00, GUYE01 |
+| Lignes desservant l'arrêt | 06, 10, 19, A1, A6 |
+| Total des montées en 2025 | 1 769 856,34 |
+
+Le programme affiche aussi les coordonnées GPS de chaque quai. J'ai remarqué que les deux quais du même arrêt n'ont pas exactement les mêmes coordonnées, ce qui est logique puisqu'ils ne sont pas situés exactement au même endroit.
+
+**Particularités des données :**
+
+J'ai remarqué que les noms des arrêts ne sont pas forcément écrits de la même manière dans le JSON et dans le XML. Du coup, pour faire la correspondance entre les deux fichiers, j'ai utilisé les codes des quais plutôt que les noms.
+
+J'ai aussi prévu le cas où l'utilisateur recherche un arrêt qui n'existe pas, ou ne saisit aucun nom. Dans ce cas, le programme affiche un message et revient au menu principal au lieu de continuer avec des résultats vides.
+
+Enfin, la recherche fonctionne même si l'utilisateur n'écrit pas exactement le nom complet de l'arrêt. Par exemple, écrire « Guye » permet de retrouver « Genève, Guye ». Par contre, si la recherche est trop générale, le programme peut retrouver plusieurs arrêts différents et additionner leurs montées.
