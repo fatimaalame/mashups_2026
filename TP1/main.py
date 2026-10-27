@@ -74,8 +74,8 @@ def fiche_ligne():
 
     #pr le nombre d'enregistrements trouvés
     for enregistrement in frequentation:
-        if (enregistrement["ligne"] == ligne_recherchee
-                and enregistrement["annee"] == "2025"):
+        if (normaliser_ligne(enregistrement["ligne"]) == ligne_recherchee
+            and enregistrement["annee"] == "2025"):
             resultats.append(enregistrement)
 
     print("Nombre d'enregistrements trouvés:", len(resultats))
@@ -127,8 +127,8 @@ def fiche_ligne():
     resultats_km = []
 
     for enregistrement in kilometres:
-        if (enregistrement["ligne"] == ligne_recherchee
-                and enregistrement["date"].startswith("2025-")):
+        if (normaliser_ligne(enregistrement["ligne"]) == ligne_recherchee
+            and enregistrement["date"].startswith("2025-")):
             resultats_km.append(enregistrement)
 
     print("\nNombre d'enregistrements kilométriques trouvés :", len(resultats_km))
@@ -151,8 +151,8 @@ def top_5_arrets():
     montees_par_arret = {}
 
     for enregistrement in frequentation:
-        if (enregistrement["ligne"] == ligne_recherchee
-                and enregistrement["annee"] == "2025"):
+        if (normaliser_ligne(enregistrement["ligne"]) == ligne_recherchee
+            and enregistrement["annee"] == "2025"):
 
             nom = enregistrement["arret"]
 
@@ -187,9 +187,9 @@ def top_5_arrets():
         codes_trouves = set()
 
         for enregistrement in frequentation:
-            if (enregistrement["ligne"] == ligne_recherchee
-                    and enregistrement["annee"] == "2025"
-                    and enregistrement["arret"] == nom):
+            if (normaliser_ligne(enregistrement["ligne"]) == ligne_recherchee
+                and enregistrement["annee"] == "2025"
+                and enregistrement["arret"] == nom):
                 codes.add(enregistrement["arret_code_long"])
 
         print(nom, ":", sorted(codes))
