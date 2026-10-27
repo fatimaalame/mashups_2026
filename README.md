@@ -33,8 +33,6 @@ Sources de mes données:
 
 ### Comment executer ? 
 
-### Comment exécuter ?
-
 Pour lancer mon programme, il faut juste avoir Python 3 installé. J'ai utilisé uniquement des bibliothèques déjà incluses dans Python, donc normalement il n'y a rien d'autre à installer :)
 
 D'abord, récupérer mon projet sur GitHub : git clone https://github.com/fatimaalame/mashups_2026.git
