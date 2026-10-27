@@ -10,11 +10,11 @@ J'aimerai créer un programme python utilisable dans le terminal qui combine des
 ### Présentation du projet
 L'objectif du TP1 est de développer un programme Python qui utilise au moins 3 fichiers de données distincts (dont au moins un JSON et un XML). J'ai pour ceci choisi d'aller chercher dans les bases de données OpenData des Transports publics genevois (TPG). Mon objectif est de pouvoir analyser les lignes du réseaux à partir des arrêts desservis, de la fréquentation des voyageurs et des km produits. Nous sommes aussi censé présenter 5 scénarios différents et une interface minimale qui s'affiche dans le terminal de l'IDE actuel. 
 
-- Le scénario 1: Fiche d'une ligne TPG qui annoncera plusieurs choses 
-- Le scénario 2: 
+- Le scénario 1: fiche d'une ligne TPG 
+- Le scénario 2: Top 5 arrêts montés par ligne
 - Le scénario 3: Quelle ligne desservent le + d'arrets ? 
-- Le scénario 4: 
-- Le scénario 5: 
+- Le scénario 4: Vacances vs horaires normaux 
+- Le scénario 5: Recherche d'un arrêt TPG
 
 ### Sources de données
 
@@ -62,7 +62,7 @@ Donc en gros, j'ai combiné les 3 fichiers pour:
 | Enregistrements kilométriques | 365 |
 | Kilomètres produits en 2025 | 845 670,80 km |
 
-Le programme affiche également les noms des arrêts distincts par ordre alphabétique : )
+Le programme affiche également les noms des arrêts distincts par ordre alphabétique :)
 
 **Particularités des données :** Enfait, les numéros de ligne ne sont pas toujours écrits de la même manière dans les fichiers ("5" en JSON et "05" en XML), ce qui est un problème. Donc j'ai utilisé  "zfill(2)" pour gérer tout ça. Et aussi, le nombre de noms distincts ne correspond pas nécessairement au nombre exact d'arrêts physiques, donc je les ai aussi enlevés (les doublons).
 
@@ -71,7 +71,6 @@ Le programme affiche également les noms des arrêts distincts par ordre alphab�
 Pour ce deuxième scénario, j'ai décidé de permettre à l'utilisateur de saisir un numéro de ligne et de voir les 5 arrêts où il y a eu le + de montées en 2025.
 
 J'ai du coup combiné 2 fichiers (frequentation.json et arrets.xml) pour :
-
 - Récupérer tous les arrêts de la ligne choisie et additionner leurs montées sur l'année 2025
 - Classer les arrêts du plus fréquenté au moins fréquenté
 - Afficher uniquement les 5 premiers

@@ -5,6 +5,14 @@ from pathlib import Path
 #importer le fichier xml
 import xml.etree.ElementTree as ET
 
+def normaliser_ligne(numero):
+    numero = str(numero).strip().upper()
+
+    if numero.isdigit():
+        return numero.zfill(2)
+
+    return numero
+
 #to locate json file then read the data et les afficher 
 #here im using the frequentation.json
 fichier = Path (__file__).parent / "data" / "frequentation.json"
@@ -202,6 +210,7 @@ def top_5_arrets():
         if codes_manquants:
             print("  Codes absents du XML :", sorted(codes_manquants))               
 
+
 ##CENARIO 3 -> Classement des lignes par nombre d'arrêts
 def classement_lignes():
     print("\n   Classement des lignes TPG   \n")
@@ -257,6 +266,7 @@ def classement_lignes():
             nombre, "arrêts distincts -",
             frequentation_texte
         )
+
 
 ##SCENARIO 4 -> Vacances vs horaires normaux
 def comparaison_horaires():
@@ -374,4 +384,7 @@ def recherche_arret():
             total_montees += enregistrement["nb_de_montees"]
 
     print("Total des montées en 2025 :", round(total_montees, 2))
+
+
 menu()
+
