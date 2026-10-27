@@ -104,8 +104,9 @@ def fiche_ligne():
         lignes = arret.findall("lignes/ligne")
 
         for ligne in lignes:
-            if normaliser_ligne(ligne.text) == ligne_recherchee:                        arrets_ligne.append(arret.findtext("nom"))
-            break
+            if normaliser_ligne(ligne.text) == ligne_recherchee:                        
+                arrets_ligne.append(arret.findtext("nom"))
+                break
   
 
     print("Nombre d'entrées d'arrêts :", len(arrets_ligne))
@@ -260,7 +261,7 @@ def classement_lignes():
 
         print(
             "Ligne", numero, ":",
-            nombre, "arrêts distincts -",
+            nombre, "arrêts distincts avec ",
             frequentation_texte
         )
 
