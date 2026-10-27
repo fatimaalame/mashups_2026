@@ -129,7 +129,7 @@ J'ai combiné 2 fichiers (arrets.xml et frequentation.json) pour :
 
 Le programme a trouvé 91 lignes différentes dans le XML, mais j'ai décidé d'afficher uniquement les 10 premières pour que le résultat soit plus lisible dans le terminal
 
-**Particularités des données :** Comme dans le scénario 1, les numéros de ligne ne sont pas toujours écrits de la même manière dans les deux fichiers. J'ai donc utilisé zfill(2) pour pouvoir comparer les numéros du JSON avec ceux du XML. J'ai aussi remarqué que certaines lignes présentes dans le XML n'ont pas forcément de données de fréquentation correspondantes dans le JSON. Par exemple, la ligne A possède 37 noms d'arrêts distincts et 1 116 000,14 montées en 2025. Au début, le programme ne retrouvait pas cette fréquentation à cause de la différence d'écriture des numéros de ligne entre les fichiers. J'ai donc corrigé ce problème avec ma fonction normaliser_ligne(). Au lieu d'afficher 0, ce qui pourrait laisser penser que personne n'a utilisé cette ligne, j'ai préféré afficher "Données de fréquentation indisponibles". Finally, les arrêts sont comptés à partir de leurs noms distincts. Cela ne correspond donc pas forcément au nombre exact d'arrêts physiques du réseau.
+**Particularités des données :** Comme dans le scénario 1, les numéros de ligne ne sont pas toujours écrits de la même manière dans les deux fichiers. J'ai donc utilisé zfill(2) pour pouvoir comparer les numéros du JSON avec ceux du XML. J'ai aussi remarqué que certaines lignes présentes dans le XML n'ont pas forcément de données de fréquentation correspondantes dans le JSON. Par exemple, la ligne A possède 37 noms d'arrêts distincts et 1 116 000,14 montées en 2025. Au début, le programme ne retrouvait pas cette fréquentation à cause de la différence d'écriture des numéros de ligne entre les fichiers. J'ai donc corrigé ce problème avec ma fonction normaliser_ligne(). Finally, les arrêts sont comptés à partir de leurs noms distincts. Cela ne correspond donc pas forcément au nombre exact d'arrêts physiques du réseau.
 
 ### Scénario 4: Comparaison des horaires VACANCES et NORMAL
 
@@ -137,42 +137,38 @@ Pour ce 4eme scénario, je voulais voir s'il y avait une vraie différence entre
 
 J'ai donc utilisé 2 fichiers (kilometres.json et frequentation.json) pour pouvoir comparer tout ça. En gros, le programme permet à l'utilisateur de choisir une ligne, puis il va chercher les kilomètres produits en 2025. Ensuite, j'ai séparé les données en deux catégories, VACANCES et NORMAL, pour calculer la moyenne des kilomètres produits pour chacune. Au début, je pensais simplement comparer le total des kilomètres, mais enfait ça n'aurait pas été très représentatif, parce qu'il n'y a pas le même nombre de jours dans les deux catégories. Donc j'ai plutôt décidé de calculer une moyenne par jour et ensuite de regarder la différence en pourcentage.
 
-**Par ex avec les lignes 5 et 1 :**
+**Par exemple avec la ligne 12 :**
 
-| Indicateur | Ligne 5 | Ligne 1 |
-|---|---:|---:|
-| Jours VACANCES | 63 | 63 |
-| Jours NORMAL | 190 | 190 |
-| Moyenne VACANCES | 2 101,70 km | 2 126,95 km |
-| Moyenne NORMAL | 2 748,39 km | 2 716,78 km |
-| Différence | 646,69 km | 589,83 km |
-| Diminution | 23,53 % | 21,71 % |
-| Montées en 2025 | 6 375 036,69 | 6 892 915,82 |
+| Indicateur | Ligne 12 |
+|---|---:|
+| Jours VACANCES | 63 |
+| Jours NORMAL | 190 |
+| Moyenne VACANCES | 3 717,38 km |
+| Moyenne NORMAL | 3 783,96 km |
+| Différence | 66,58 km |
+| Diminution | 1,76 % |
+| Montées en 2025 | 21 018 435,15 |
 
-Ce que je trouve intéressant, c'est que pour les deux lignes que j'ai testées, on voit une diminution des kilomètres produits pendant les jours VACANCES. Pour la ligne 5, par exemple, c'est environ 23,53 % de moins que pendant les jours NORMAL. Je pensais qu'il y aurait une différence, mais je ne savais pas qu'elle serait aussi importante. J'ai aussi décidé d'afficher le nombre total des montées en 2025 à partir de frequentation.json, histoire d'avoir une information supplémentaire sur la fréquentation de la ligne. Par contre, ça ne veut pas dire que les voyageurs diminuent de 23,53 % pendant les vacances ! Les données de fréquentation concernent toute l'année, alors que le pourcentage concerne uniquement les kilomètres produits.
+Ce que je trouve intéressant, c'est que pour la ligne 12, on voit une diminution des kilomètres produits pendant les jours VACANCES, même si elle est assez faible : seulement 1,76 %. Et puisque la ligne 12 passe par Battelle, où se trouve notre cher CUI, je me suis dit que cette petite diminution était peut-être due aux étudiants qui ne viennent plus en cours pendant les vacances. Comme quoi, nos vacances font peut-être aussi du bien aux TPG :) Bon, évidemment, ce n'est qu'une hypothèse. Les chiffres concernent les kilomètres produits, pas directement le nb de voyageurs. 
 
-**Particularités des données :** Enfait, j'ai remarqué que le fichier kilometres.json ne contient pas uniquement les catégories VACANCES et NORMAL. Par exemple, pour la ligne 5, il y a 365 enregistrements en 2025, mais seulement 253 correspondent aux deux types d'horaires que j'ai décidé de comparer. Les autres ne sont donc pas pris en compte ici. J'ai également vérifié les dates pour être sûre de ne pas compter plusieurs fois le même jour. Pour les deux lignes testées, chaque enregistrement VACANCES et NORMAL correspond bien à un jour différent, ce qui permet de parler de moyenne quotidienne.Enfin, j'ai testé les lignes 5 et 1 pour voir si le programme fonctionnait avec plusieurs lignes, et les résultats correspondent aussi aux calculs de fréquentation que j'avais obtenus dans les scénarios précédents 
+De plus, j'ai remarqué que le fichier kilometres.json ne contient pas uniquement les catégories VACANCES et NORMAL. J'ai donc choisi de garder seulement ces deux types d'horaires pour ma comparaison. J'ai aussi fait attention à calculer une moyenne par jour, plutôt que par enregistrement, pour éviter de fausser les résultats si une même date apparaît plusieurs fois. Enfin, j'ai utilisé la ligne 12 comme exemple, pour pouvoir comparer les deux horaires et voir si la différence était vraiment importante.
 
 
 ### Scénario 5 : Recherche d'un arrêt TPG
 Pour ce dernier scénario, j'ai voulu faire un peu l'inverse du scénario 1. Au lieu de chercher une ligne TPG et de voir quels arrêts elle dessert, je voulais permettre à l'utilisateur de rechercher directement un arrêt par son nom et d'obtenir des informations dessus. J'ai donc combiné 2 fichiers (arrets.xml et frequentation.json). Le programme cherche d'abord le nom de l'arrêt dans le XML, puis affiche les différents quais, leurs coordonnées GPS et les lignes qui les desservent. Ensuite, il utilise les codes des quais pour retrouver dans le JSON le total des montées en 2025, toutes lignes confondues.
 
-**Exemple avec l'arrêt Guye :**
+**Exemple avec l'arrêt Battelle :**
 
 | Indicateur | Résultat |
 |---|---|
-| Arrêt trouvé | Genève, Guye |
-| Nombre de quais | 2 |
-| Codes des quais | GUYE00, GUYE01 |
-| Lignes desservant l'arrêt | 06, 10, 19, A1, A6 |
-| Total des montées en 2025 | 1 769 856,34 |
+| Arrêt trouvé | Carouge GE, Battelle |
+| Nombre de quais | 1 |
+| Code du quai | BALE00 |
+| Ligne desservant l'arrêt | 41 |
+| Total des montées en 2025 | 1 184,97 |
 
-Le programme affiche aussi les coordonnées GPS de chaque quai. J'ai remarqué que les deux quais du même arrêt n'ont pas exactement les mêmes coordonnées, ce qui est logique puisqu'ils ne sont pas situés exactement au même endroit.
+Pour cet exemple, j'ai choisi l'arrêt Battelle, histoire de rester dans le thème du CUI ! Mon programme a retrouvé un seul quai (BALE00), desservi par la ligne 41, avec un total de 1 184,97 montées en 2025. Le programme affiche également les coordonnées GPS du quai. Et comme il suffit d'écrire « Battelle » pour retrouver « Carouge GE, Battelle », l'utilisateur n'a pas forcément besoin de connaître le nom complet de l'arrêt.
 
 **Particularités des données :**
 
-J'ai remarqué que les noms des arrêts ne sont pas forcément écrits de la même manière dans le JSON et dans le XML. Du coup, pour faire la correspondance entre les deux fichiers, j'ai utilisé les codes des quais plutôt que les noms.
-
-J'ai aussi prévu le cas où l'utilisateur recherche un arrêt qui n'existe pas, ou ne saisit aucun nom. Dans ce cas, le programme affiche un message et revient au menu principal au lieu de continuer avec des résultats vides.
-
-Enfin, la recherche fonctionne même si l'utilisateur n'écrit pas exactement le nom complet de l'arrêt. Par exemple, écrire « Guye » permet de retrouver « Genève, Guye ». Par contre, si la recherche est trop générale, le programme peut retrouver plusieurs arrêts différents et additionner leurs montées.
+J'ai remarqué que les noms des arrêts ne sont pas forcément écrits de la même manière dans le JSON et dans le XML. Du coup, pour faire la correspondance entre les deux fichiers, j'ai utilisé les codes des quais plutôt que les noms. J'ai aussi prévu le cas où l'utilisateur recherche un arrêt qui n'existe pas, ou ne saisit aucun nom. Dans ce cas, le programme affiche un message et revient au menu principal au lieu de continuer avec des résultats vides. Enfin, la recherche fonctionne même si l'utilisateur n'écrit pas exactement le nom complet de l'arrêt. Par exemple, écrire « Battelle » permet de retrouver « Carouge GE, Battelle ». Par contre, si la recherche est trop générale, le programme peut retrouver plusieurs arrêts différents et additionner leurs montées.
