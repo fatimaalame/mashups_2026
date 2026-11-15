@@ -213,3 +213,6 @@ le 25.10.26]
 27.10.26]
 - Pour le set ( ) : https://www.geeksforgeeks.org/python/python-set-function/ [consulté le
 27.10.26]
+ -------------------------------------------------
+
+## TP2: utiliser une API 
