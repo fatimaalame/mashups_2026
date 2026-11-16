@@ -33,5 +33,5 @@ mesure = {
 }
 mesures.append(mesure)
 
-with open("TP2(Partie1/measures.json)", "w", encoding="utf-8") as fichier:
+with open("TP2/Partie1/measures.json", "w", encoding="utf-8") as fichier:
     json.dump(mesures, fichier, indent=4, ensure_ascii=False)
