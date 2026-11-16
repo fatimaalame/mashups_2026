@@ -5,12 +5,11 @@ from datetime import datetime
 url = "http://10.194.69.214:3671/api/v1/sensors/5/luminance"
 url_ampoule = "http://10.194.69.214:3671/api/v1/dimmers/7" 
 
-reponse = requests.get(url) #à l'adresse du capteur 
+reponse = requests.get(url, timeout=10) #à l'adresse du capteur 
 donnees = reponse.json()
 luminosite = donnees["value"]
 
 print("luminosité: ", luminosite, "lux")
-reponse = requests.get(url, timeout=10)
 
 ## luminosite = 100 #test temporaire 
 if luminosite >= 200:
