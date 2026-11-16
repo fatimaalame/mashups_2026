@@ -27,7 +27,7 @@ print("Statut de la commande:", reponse_ampoule.status_code)
 
 mesures = []
 mesure = {
-    "date_heure": datetime.now().isoformat(timepec="seconds"),
+    "date_heure": datetime.now().isoformat(timespec="seconds"),
     "luminosite": luminosite,
     "ampoule": ampoule
 }
