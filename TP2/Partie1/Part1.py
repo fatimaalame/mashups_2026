@@ -39,7 +39,7 @@ for i in range (10):
         print("Mesure", i + 1, ":", luminosite, "lux")
     
     except requests.RequestException as error:
-                print("erreur de connexion:", erreur)
+                print("erreur de connexion:", error)
     if i < 9: 
             time.sleep(30)
 
