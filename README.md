@@ -216,3 +216,34 @@ le 25.10.26]
  -------------------------------------------------
 
 ## TP2: utiliser une API 
+
+### Partie 1 : Régulation de la luminosité
+
+### Objectif
+Ici, je devais réguler automatiquement une ampoule en fonction de la luminosité ambiante (en utilisant une API REST). D'ailleurs, le programme cherche à maintenir une luminosité de 200 lux.
+
+### Le fonctionnement
+Mon programme:
+ 1. récupère la luminosité du capteur avec GET
+ 2. Calcule l'intensité de l'ampoule en fonction de la luminosité mesurée
+ 3. Envoie la nouvelle intensité à l'ampoule avec PUT
+ 4. Enregistre la date + luminosité + l'intensité ds un fichier JSON
+ 5. Répète ces opérations 10 fois avec intervalle de 30 secondes
+
+Juste, si la luminosité >= 200 lux, l'ampoule reçoit la val 0. Sinon, son intensité est calculée avec la formule : round(((200 - luminosite) / 200) * 99) (donnée en cours)
+
+### Technologies utilisées 
+- Python
+- Bibliothèque requests + json + datetime + time
+
+J'ai utilisé ces biblio pour pouvoir communiquer avec l'API REST, enregistrer les mesures, save les dates et les heures et enfin pour attendre (par ex pour écrire time.sleep(30)) 
+
+### Exécution
+Le programme se trouve dans TP2/Partie1/Part1.py. Par contre, faut avoir une connexion au VPN de l'UNIGE pour accéder à l'API privée.
+Pour installer la biblio, il faut faire (pip install requests), et ensuite depuis la racine du dépots, faut lancer python3 TP2/Partie1/Part1.py
+
+### Résultats
+Enfait, à chaque fois qu'on execute, ça va créer un fichier JSON dans le dossier TP2/Partie1. Et j'ai fais en sorte que le nom du fichier a la date et l'heure de la session (pour garder les results des diff executions). De plus, les mesures sont à chaque fois sauvegardées progressivement pour ne pas avoir une perte de données (si ça s'interrompt)
+
+### Gestion des erreurs
+J'ai utilisé try et except pour détecter les erreurs de comm avec l'API. Et si y'a une erreur réseau, il y aura un message qui s'affiche et le programme va continuer avec la tentative d'après. 
