@@ -25,7 +25,8 @@ for i in range (10):
         #to send la val de la formule pr régler ampoule
         commande = {"value": ampoule} 
         reponse_ampoule = requests.put(url_ampoule, json=commande, timeout=10)
-
+        reponse_ampoule.raise_for_status()
+        
         mesure = { #save la mesure dans liste + dico 
             "date_heure": datetime.now().isoformat(timespec="seconds"),
             "luminosite": luminosite,
