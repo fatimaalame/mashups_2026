@@ -26,7 +26,7 @@ for i in range (10):
         commande = {"value": ampoule} 
         reponse_ampoule = requests.put(url_ampoule, json=commande, timeout=10)
         reponse_ampoule.raise_for_status()
-        
+
         mesure = { #save la mesure dans liste + dico 
             "date_heure": datetime.now().isoformat(timespec="seconds"),
             "luminosite": luminosite,
@@ -40,7 +40,7 @@ for i in range (10):
         print("Mesure", i + 1, ":", luminosite, "lux")
     
     except requests.RequestException as error:
-                print("erreur de connexion:", error)
+        print("erreur de connexion:", error)
     if i < 9: 
-            time.sleep(30)
+        time.sleep(30)
 
