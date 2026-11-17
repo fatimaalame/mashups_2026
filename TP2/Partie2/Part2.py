@@ -2,7 +2,6 @@ import requests
 
 url_catalogue_tpg = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/arrets/records"
 url_montees = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/montees-par-arret-par-ligne/records"
-url_osm = "https://nominatim.openstreetmap.org/search"
 
 
 print() #debut interface
@@ -65,25 +64,6 @@ elif total_descentes > total_montees:
 else:
     print(nom_arret, " -> autant de départs que d'arrivées")        
 print()
-
-reponse_osm = requests.get(
-    url_osm,
-    params = {"q":f"{nom_arret} Genève, Suisse", "format": "json", "limit":1},
-    headers={"User-Agent":"MashupUNIGEStudentProject/1.0(education)"},timeout=10
-)
-
-reponse_osm.raise_for_status()
-donnees_osm = reponse_osm.json()
-
-if donnees_osm:
-    latitude = donnees_osm[0]["lat"]
-    longitude = donnees_osm[0]["lon"]
-
-    print("Latitude :", latitude)
-    print("Longitude :", longitude)
-else:
-    print("Aucun résultat OpenStreetMap")
-
 
 total_movement= total_montees + total_descentes 
 if total_movement > 0:
