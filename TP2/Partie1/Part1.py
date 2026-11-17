@@ -2,13 +2,18 @@ import requests
 import json 
 from datetime import datetime
 import time
+import os
+
+dossier_mesures = os.path.join(os.path.dirname(__file__), "my_measures")
+os.makedirs(dossier_mesures, exist_ok=True)
+nom_fichier = "mesures_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".json"
+chemin_fichier = os.path.join(dossier_mesures, nom_fichier)
 
 url = "http://10.194.69.214:3671/api/v1/sensors/5/luminance"
 url_ampoule = "http://10.194.69.214:3671/api/v1/dimmers/7" 
 
 mesures = []
 
-nom_fichier = "TP2/Partie1/mesures_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".json"
 
 for i in range (10):
     try:    
@@ -34,7 +39,7 @@ for i in range (10):
         }
         mesures.append(mesure)
 
-        with open(nom_fichier, "w", encoding="utf-8") as fichier:
+        with open(chemin_fichier, "w", encoding="utf-8") as fichier:
             json.dump(mesures, fichier, indent=4, ensure_ascii=False)
 
         print("Mesure", i + 1, ":", luminosite, "lux")

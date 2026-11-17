@@ -1,0 +1,52 @@
+[
+    {
+        "date_heure": "2026-11-17T16:40:32",
+        "luminosite": 60,
+        "ampoule": 69
+    },
+    {
+        "date_heure": "2026-11-17T16:41:03",
+        "luminosite": 60,
+        "ampoule": 69
+    },
+    {
+        "date_heure": "2026-11-17T16:41:33",
+        "luminosite": 60,
+        "ampoule": 69
+    },
+    {
+        "date_heure": "2026-11-17T16:42:04",
+        "luminosite": 60,
+        "ampoule": 69
+    },
+    {
+        "date_heure": "2026-11-17T16:42:34",
+        "luminosite": 60,
+        "ampoule": 69
+    },
+    {
+        "date_heure": "2026-11-17T16:43:04",
+        "luminosite": 60,
+        "ampoule": 69
+    },
+    {
+        "date_heure": "2026-11-17T16:43:35",
+        "luminosite": 50,
+        "ampoule": 74
+    },
+    {
+        "date_heure": "2026-11-17T16:44:05",
+        "luminosite": 50,
+        "ampoule": 74
+    },
+    {
+        "date_heure": "2026-11-17T16:44:36",
+        "luminosite": 50,
+        "ampoule": 74
+    },
+    {
+        "date_heure": "2026-11-17T16:45:06",
+        "luminosite": 50,
+        "ampoule": 74
+    }
+]
