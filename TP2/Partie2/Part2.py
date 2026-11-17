@@ -3,9 +3,11 @@ import requests
 url_catalogue_tpg = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/arrets/records"
 url_montees = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/montees-par-arret-par-ligne/records"
 url_osm = "https://nominatim.openstreetmap.org/search"
+
+nom_arret = "Gare Cornavin"
 reponse = requests.get(
     url_catalogue_tpg,
-    params={"where": "search(nomarret, 'Cornavin')", "limit":100},
+    params={"where": f"search(nomarret, '{nom_arret}')", "limit":100},
     timeout=10
 )
 
@@ -14,11 +16,11 @@ reponse.raise_for_status()
 donnees = reponse.json()
 codes_arrets = []
 for arret in donnees ["results"]:
-    if arret["nomarret"] == "Gare Cornavin":
+    if arret["nomarret"] == nom_arret:
         codes_arrets.append(arret["arretcodelong"])
 
 print("Nb de résultats:", donnees["total_count"])
-print("Code de Gare Cornavin:", codes_arrets)
+print("Code de", nom_arret, ":",codes_arrets)
 print("Nb de codes:", len(codes_arrets))
 
 liste_codes = ", ".join("'" + code + "'" for code in codes_arrets)
@@ -44,15 +46,15 @@ print("Total montées:", round(total_montees, 2))
 print("Total descentes:", round(total_descentes, 2))
 
 if total_montees > total_descentes:
-    print("Cornavin:plutot départ")
+    print(nom_arret, " -> plutot départ")
 elif total_descentes > total_montees:
-    print("cornavin: plutot arrivée")
+    print(nom_arret, " -> plutot arrivée")
 else:
-    print("Cornavin: autant de départs que d'arrivées")        
+    print(nom_arret, " -> autant de départs que d'arrivées")        
 
 reponse_osm = requests.get(
     url_osm,
-    params = {"q":"Gare Cornavin, Genève, Suisse", "format": "json", "limit":1},
+    params = {"q":f"{nom_arret} Genève, Suisse", "format": "json", "limit":1},
     headers={"User-Agent":"MashupUNIGEStudentProject/1.0(education)"},timeout=10
 )
 
