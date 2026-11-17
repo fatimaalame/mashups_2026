@@ -2,7 +2,15 @@ import requests
 
 url = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/arrets/records"
 
-reponse = requests.get(url, params={"limit": 3}, timeout = 10)
-donnees = reponse.json() #answer is an json dico
+reponse = requests.get(
+    url,
+    params={"where": "search(nomarret, 'Cornavin')", "limit":20},
+    timeout=10
+)
 
-print(donnees["results"])
+reponse.raise_for_status()
+
+donnees = reponse.json()
+
+for arret in donnees ["results"]:
+    print(arret["nomarret"], ",", arret["arretcodelong"])
