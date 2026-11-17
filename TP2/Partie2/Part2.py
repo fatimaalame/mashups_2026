@@ -22,12 +22,13 @@ print("Nb de codes:", len(codes_arrets))
 
 reponse_montees = requests.get(
     url_montees,
-    params={"where": "arret_code_long = 'CVIN03' AND date = date'2026-02-07'","limit": 100},
+    params={"where": "arret_code_long IN ('CVIN03', 'CVIN04') AND date = date'2026-02-07'","limit": 100},
     timeout=10
 )
 
 reponse_montees.raise_for_status()
 donnees_montees = reponse_montees.json()
+print("Nombre de mesures:", donnees_montees["total_count"])
 
 total_montees = 0 
 total_descentes = 0 
