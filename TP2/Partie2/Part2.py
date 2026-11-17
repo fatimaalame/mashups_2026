@@ -20,9 +20,11 @@ print("Nb de résultats:", donnees["total_count"])
 print("Code de Gare Cornavin:", codes_arrets)
 print("Nb de codes:", len(codes_arrets))
 
+liste_codes = ", ".join("'" + code + "'" for code in codes_arrets)
+
 reponse_montees = requests.get(
     url_montees,
-    params={"where": "arret_code_long IN ('CVIN03', 'CVIN04') AND date = date'2026-02-07'","limit": 100},
+    params={"where": f"arret_code_long IN ({liste_codes}) AND date = date'2026-02-07'","limit": 100},
     timeout=10
 )
 
