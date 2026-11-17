@@ -14,3 +14,5 @@ donnees = reponse.json()
 
 for arret in donnees ["results"]:
     print(arret["nomarret"], ",", arret["arretcodelong"])
+
+print("Nb de résultats:", donnees["total_count"])
