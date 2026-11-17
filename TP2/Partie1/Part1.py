@@ -18,6 +18,7 @@ mesures = []
 for i in range (10):
     try:    
         reponse = requests.get(url, timeout=10) #à l'adresse du capteur + récup nlle luminosité
+        reponse.raise_for_status()
         donnees = reponse.json()
         luminosite = donnees["value"]
 
