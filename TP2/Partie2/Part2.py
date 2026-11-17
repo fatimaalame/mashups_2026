@@ -155,7 +155,7 @@ def main ():
     while choix != "0":
         print()
         print(" -- TPG OPEN API -- ")
-        print(" 1.Fréquentation d'un arrêt")
+        print("1.Fréquentation d'un arrêt")
         print("2. Rechercher les arrêts par lettre")
         print("0. Quitter")
         print()
