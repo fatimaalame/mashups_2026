@@ -1,0 +1,24 @@
+{
+    "arret": "Plainpalais",
+    "date_donnees": "2026-02-07",
+    "codes_arrets": [
+        "PLPA00",
+        "PLPA08",
+        "PLPA09",
+        "PLPA96",
+        "PLPA01",
+        "PLPA02",
+        "PLPA03",
+        "PLPA04",
+        "PLPA06",
+        "PLPA97",
+        "PLPA98",
+        "PLPA05",
+        "PLPA07",
+        "PLPA99"
+    ],
+    "total_montees": 9362.33,
+    "total_descentes": 9492.57,
+    "pourcentage_montees": 49.65,
+    "pourcentage_descentes": 50.35
+}

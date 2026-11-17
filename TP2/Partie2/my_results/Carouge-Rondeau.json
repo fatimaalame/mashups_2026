@@ -1,0 +1,24 @@
+{
+    "arret": "Carouge-Rondeau",
+    "date_donnees": "2026-02-07",
+    "codes_arrets": [
+        "CRGE07",
+        "CRGE96",
+        "CRGE97",
+        "CRGE99",
+        "CRGE01",
+        "CRGE02",
+        "CRGE03",
+        "CRGE05",
+        "CRGE06",
+        "CRGE08",
+        "CRGE00",
+        "CRGE04",
+        "CRGE09",
+        "CRGE98"
+    ],
+    "total_montees": 3155.43,
+    "total_descentes": 2986.29,
+    "pourcentage_montees": 51.38,
+    "pourcentage_descentes": 48.62
+}
