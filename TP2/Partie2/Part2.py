@@ -4,8 +4,13 @@ url_catalogue_tpg = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/a
 url_montees = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/montees-par-arret-par-ligne/records"
 url_osm = "https://nominatim.openstreetmap.org/search"
 
-nom_arret = "arretinexistant" ## test pour protection
-nom_arret = "Gare Cornavin"
+print()
+print (" -- TPG OPEN API  -- ")
+print()
+
+##nom_arret = "arretinexistant" ## test pour protection
+nom_arret = input("Entrez le nom d'un arrêt TPG : ")
+print()
 reponse = requests.get(
     url_catalogue_tpg,
     params={"where": f"search(nomarret, '{nom_arret}')", "limit":100},
@@ -47,6 +52,8 @@ for mesure in donnees_montees["results"]:
     total_montees += mesure ["nb_de_montees"]
     total_descentes += mesure ["nb_de_descentes"]
 
+print ()
+print(" -- Résultats pour " , nom_arret, " -- ")
 print("Total montées:", round(total_montees, 2))
 print("Total descentes:", round(total_descentes, 2))
 
@@ -86,3 +93,4 @@ else:
 
 print("pourcentage de montées: ", round(pourcentage_montees,2),"%")
 print("pourcentage de descentes:", round(pourcentage_descentes,2),"%")
+print ()
