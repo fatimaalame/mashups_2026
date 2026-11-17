@@ -70,7 +70,7 @@ else:
 
 total_voyageurs = total_montees + total_descentes 
 pourcentage_montees = (total_montees / total_voyageurs) * 100
-pourcentage_descentes = (total_montees / total_voyageurs) * 100
+pourcentage_descentes = (total_descentes / total_voyageurs) * 100
 
 
 print("pourcentage de montées: ", round(pourcentage_montees,2),"%")
