@@ -11,14 +11,18 @@ def analyser_frequentation():
     ##nom_arret = "arretinexistant" ## test pour protection
     nom_arret = input("Entrez le nom d'un arrêt TPG : ")
     print()
-    reponse = requests.get(
-        url_catalogue_tpg,
-        params={"where": f"search(nomarret, '{nom_arret}')", "limit":100},
-        timeout=10
-    )
+    try:
+        reponse = requests.get(
+            url_catalogue_tpg,
+            params={"where": f"search(nomarret, '{nom_arret}')", "limit":100},
+            timeout=10
+        )
 
-    reponse.raise_for_status()
-
+        reponse.raise_for_status()
+    except requests.RequestException:
+        print("pas de connexion avec l'API TPG")
+        return
+    
     donnees = reponse.json()
     codes_arrets = []
     for arret in donnees ["results"]:
@@ -34,14 +38,18 @@ def analyser_frequentation():
         return
 
     liste_codes = ", ".join("'" + code + "'" for code in codes_arrets)
+    try:
+        reponse_montees = requests.get(
+            url_montees,
+            params={"where": f"arret_code_long IN ({liste_codes}) AND date = date'2026-02-07'","limit": 100},
+            timeout=10
+        )
 
-    reponse_montees = requests.get(
-        url_montees,
-        params={"where": f"arret_code_long IN ({liste_codes}) AND date = date'2026-02-07'","limit": 100},
-        timeout=10
-    )
-
-    reponse_montees.raise_for_status()
+        reponse_montees.raise_for_status()
+    except requests.RequestException:
+        print("pas de connexion avec l'API TPG")
+        return
+    
     donnees_montees = reponse_montees.json()
     print("Nb de mesures trouvées:", donnees_montees["total_count"])
 
@@ -109,14 +117,18 @@ def rechercher_par_lettre():
     offset = 0 
     
     while True: 
-        reponse = requests.get(
-            url_catalogue_tpg, 
-            params = {"where": f"startswith(nomarret, '{lettre}')", "order_by":"nomarret asc", "limit":100, "offset": offset},
-            timeout=10
-        )
-        reponse.raise_for_status()
-        donnees = reponse.json()
-
+        try:
+            reponse = requests.get(
+                url_catalogue_tpg, 
+                params = {"where": f"startswith(nomarret, '{lettre}')", "order_by":"nomarret asc", "limit":100, "offset": offset},
+                timeout=10
+            )
+            reponse.raise_for_status()
+            donnees = reponse.json()
+        except requests.RequestException:
+            print("pas de connexion avec l'API TPG")
+            return
+        
         for arret in donnees ["results"]:
             nom = arret ["nomarret"]
             if nom not in noms_arrets:
