@@ -41,3 +41,10 @@ for mesure in donnees_montees["results"]:
 
 print("Total montées:", round(total_montees, 2))
 print("Total descentes:", round(total_descentes, 2))
+
+if total_montees > total_descentes:
+    print("Cornavin:plutot départ")
+elif total_descentes > total_montees:
+    print("cornavin: plutot arrivée")
+else:
+    print("Cornavin: autant de départs que d'arrivées")        
