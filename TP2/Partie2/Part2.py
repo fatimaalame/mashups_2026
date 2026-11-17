@@ -4,6 +4,7 @@ url_catalogue_tpg = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/a
 url_montees = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/montees-par-arret-par-ligne/records"
 url_osm = "https://nominatim.openstreetmap.org/search"
 
+nom_arret = "arretinexistant" ## test pour protection
 nom_arret = "Gare Cornavin"
 reponse = requests.get(
     url_catalogue_tpg,
@@ -22,6 +23,10 @@ for arret in donnees ["results"]:
 print("Nb de résultats:", donnees["total_count"])
 print("Code de", nom_arret, ":",codes_arrets)
 print("Nb de codes:", len(codes_arrets))
+
+if not codes_arrets:
+    print("Aucun code trouvé pour", nom_arret)
+    exit ()
 
 liste_codes = ", ".join("'" + code + "'" for code in codes_arrets)
 
@@ -70,10 +75,14 @@ if donnees_osm:
 else:
     print("Aucun résultat OpenStreetMap")
 
-total_voyageurs = total_montees + total_descentes 
-pourcentage_montees = (total_montees / total_voyageurs) * 100
-pourcentage_descentes = (total_descentes / total_voyageurs) * 100
 
+total_movement= total_montees + total_descentes 
+if total_movement > 0:
+    pourcentage_montees = (total_montees / total_movement) * 100
+    pourcentage_descentes = (total_descentes / total_movement) * 100
+else:
+    pourcentage_montees = 0
+    pourcentage_descentes = 0 
 
 print("pourcentage de montées: ", round(pourcentage_montees,2),"%")
 print("pourcentage de descentes:", round(pourcentage_descentes,2),"%")
