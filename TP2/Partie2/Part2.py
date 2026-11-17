@@ -67,3 +67,11 @@ if donnees_osm:
     print("Longitude :", longitude)
 else:
     print("Aucun résultat OpenStreetMap")
+
+total_voyageurs = total_montees + total_descentes 
+pourcentage_montees = (total_montees / total_voyageurs) * 100
+pourcentage_descentes = (total_montees / total_voyageurs) * 100
+
+
+print("pourcentage de montées: ", round(pourcentage_montees,2),"%")
+print("pourcentage de descentes:", round(pourcentage_descentes,2),"%")
