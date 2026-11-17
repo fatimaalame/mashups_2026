@@ -4,7 +4,8 @@ url_catalogue_tpg = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/a
 url_montees = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/montees-par-arret-par-ligne/records"
 url_osm = "https://nominatim.openstreetmap.org/search"
 
-print()
+
+print() #debut interface
 print (" -- TPG OPEN API  -- ")
 print()
 
@@ -22,7 +23,7 @@ reponse.raise_for_status()
 donnees = reponse.json()
 codes_arrets = []
 for arret in donnees ["results"]:
-    if arret["nomarret"] == nom_arret:
+    if arret["nomarret"].casefold() == nom_arret.casefold():
         codes_arrets.append(arret["arretcodelong"])
 
 print("Nb de résultats:", donnees["total_count"])
@@ -43,7 +44,7 @@ reponse_montees = requests.get(
 
 reponse_montees.raise_for_status()
 donnees_montees = reponse_montees.json()
-print("Nombre de mesures:", donnees_montees["total_count"])
+print("Nb de mesures trouvées:", donnees_montees["total_count"])
 
 total_montees = 0 
 total_descentes = 0 
@@ -56,13 +57,14 @@ print ()
 print(" -- Résultats pour " , nom_arret, " -- ")
 print("Total montées:", round(total_montees, 2))
 print("Total descentes:", round(total_descentes, 2))
-
+print ()
 if total_montees > total_descentes:
     print(nom_arret, " -> plutot départ")
 elif total_descentes > total_montees:
     print(nom_arret, " -> plutot arrivée")
 else:
     print(nom_arret, " -> autant de départs que d'arrivées")        
+print()
 
 reponse_osm = requests.get(
     url_osm,
