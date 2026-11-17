@@ -1,9 +1,10 @@
 import requests 
 
-url = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/arrets/records"
+url_catalogue_tpg = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/arrets/records"
 url_montees = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/montees-par-arret-par-ligne/records"
+url_osm = "https://nominatim.openstreetmap.org/search"
 reponse = requests.get(
-    url,
+    url_catalogue_tpg,
     params={"where": "search(nomarret, 'Cornavin')", "limit":100},
     timeout=10
 )
@@ -48,3 +49,21 @@ elif total_descentes > total_montees:
     print("cornavin: plutot arrivée")
 else:
     print("Cornavin: autant de départs que d'arrivées")        
+
+reponse_osm = requests.get(
+    url_osm,
+    params = {"q":"Gare Cornavin, Genève, Suisse", "format": "json", "limit":1},
+    headers={"User-Agent":"MashupUNIGEStudentProject/1.0(education)"},timeout=10
+)
+
+reponse_osm.raise_for_status()
+donnees_osm = reponse_osm.json()
+
+if donnees_osm:
+    latitude = donnees_osm[0]["lat"]
+    longitude = donnees_osm[0]["lon"]
+
+    print("Latitude :", latitude)
+    print("Longitude :", longitude)
+else:
+    print("Aucun résultat OpenStreetMap")
