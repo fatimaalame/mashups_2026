@@ -243,7 +243,8 @@ Le programme se trouve dans TP2/Partie1/Part1.py. Par contre, faut avoir une con
 Pour installer la biblio, il faut faire (pip install requests), et ensuite depuis la racine du dépots, faut lancer python3 TP2/Partie1/Part1.py
 
 ### Résultats
-Enfait, à chaque fois qu'on execute, ça va créer un fichier JSON dans le dossier TP2/Partie1. Et j'ai fais en sorte que le nom du fichier a la date et l'heure de la session (pour garder les results des diff executions). De plus, les mesures sont à chaque fois sauvegardées progressivement pour ne pas avoir une perte de données (si ça s'interrompt)
+Enfait, à chaque fois qu'on execute, ça va créer un fichier JSON dans le dossier TP2/Partie1. Et j'ai fais en sorte que le nom du fichier a la date et l'heure de la session (pour garder les results des diff executions). De plus, les mesures sont à chaque fois sauvegardées progressivement pour ne pas avoir une perte de données (si ça s'interrompt). J'aimerai rajouter aussi que mon programme crée automatiquement un nouveau fichier json dans le dossier TP2/Partie1/my_measures. 
+J'ai aussi effectué plusieurs sessions à diff moments de la journée (entre le 16 et 17.11.2026). Et ils montrent que l'intensité de l'ampoule varie avec la luminosité ambiante. 
 
 ### Gestion des erreurs
 J'ai utilisé try et except pour détecter les erreurs de comm avec l'API. Et si y'a une erreur réseau, il y aura un message qui s'affiche et le programme va continuer avec la tentative d'après. 
