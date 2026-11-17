@@ -1,0 +1,12 @@
+{
+    "arret": "Guye",
+    "date_donnees": "2026-02-07",
+    "codes_arrets": [
+        "GUYE00",
+        "GUYE01"
+    ],
+    "total_montees": 4020.8,
+    "total_descentes": 4159.14,
+    "pourcentage_montees": 49.15,
+    "pourcentage_descentes": 50.85
+}

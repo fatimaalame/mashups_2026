@@ -6,9 +6,7 @@ url_catalogue_tpg = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/a
 url_montees = "https://opendata.tpg.ch/api/explore/v2.1/catalog/datasets/montees-par-arret-par-ligne/records"
 
 def analyser_frequentation():
-    print() #debut interface
-    print (" -- TPG OPEN API  -- ")
-    print()
+    print() #debut interface1
 
     ##nom_arret = "arretinexistant" ## test pour protection
     nom_arret = input("Entrez le nom d'un arrêt TPG : ")
@@ -33,7 +31,7 @@ def analyser_frequentation():
 
     if not codes_arrets:
         print("Aucun code trouvé pour", nom_arret)
-        exit ()
+        return
 
     liste_codes = ", ".join("'" + code + "'" for code in codes_arrets)
 
@@ -98,3 +96,27 @@ def analyser_frequentation():
 
     with open(chemin_fichier, "w", encoding="utf-8") as fichier:
         json.dump(resultat, fichier, indent=4, ensure_ascii=False)
+
+def main ():
+    choix = "" 
+    while choix != "0":
+        print()
+        print(" -- TPG OPEN API -- ")
+        print(" 1.Fréquentation d'un arrêt")
+        print("2. Rechercher les arrêts par lettre")
+        print("0. Quitter")
+        print()
+
+        choix = input ("Votre input ? ")
+        if choix == "1":
+            analyser_frequentation()
+        elif choix == "2":
+            print("scénario 2 par encore fait")
+        elif choix == "0":
+            print("Au revoir")
+            print ()
+        else:
+            print("Choix inconnu, réessayez svp")
+
+if __name__ == "__main__"    :
+    main()                        
