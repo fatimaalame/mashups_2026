@@ -1,0 +1,30 @@
+{
+    "lettre": "H",
+    "nombre_arrets": 24,
+    "arrets": [
+        "Handi Tac 1",
+        "Handi Tac 2",
+        "Henri-Bordier",
+        "Henri-Golay",
+        "Henry Bordeaux",
+        "Hermance Stationnement",
+        "Hermance-Dne - CH",
+        "Hermance-Dne - F",
+        "Hermance-Douane",
+        "Hermance-Village",
+        "Hewlett-Packard",
+        "Hirondelles",
+        "Horloge Fleurie",
+        "Hospitaliers",
+        "Houblonnière",
+        "Hutins",
+        "Hôpital",
+        "Hôpital Findrol",
+        "Hôpital Trois-Chêne",
+        "Hôpital Trois-Chêne Stationnement",
+        "Hôpital de Bellerive",
+        "Hôpital de La Tour",
+        "Hôtel des Impôts",
+        "Hôtel-de-Ville"
+    ]
+}

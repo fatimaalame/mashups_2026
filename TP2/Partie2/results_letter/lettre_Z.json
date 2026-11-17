@@ -1,0 +1,16 @@
+{
+    "lettre": "Z",
+    "nombre_arrets": 10,
+    "arrets": [
+        "ZI Borly",
+        "ZI Les Moulins",
+        "ZI de Montréal",
+        "ZIMEYSA",
+        "ZIMEYSA-Gare",
+        "ZIMEYSA-Ouest",
+        "ZIMOGA",
+        "ZIPLO",
+        "ZIPLO - Etude",
+        "ZIPLO Stationnement"
+    ]
+}

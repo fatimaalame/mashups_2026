@@ -1,0 +1,17 @@
+{
+    "arret": "Uni-mail",
+    "date_donnees": "2026-02-07",
+    "codes_arrets": [
+        "UNIM99",
+        "UNIM00",
+        "UNIM02",
+        "UNIM01",
+        "UNIM03",
+        "UNIM04",
+        "UNIM98"
+    ],
+    "total_montees": 3598.37,
+    "total_descentes": 3354.54,
+    "pourcentage_montees": 51.75,
+    "pourcentage_descentes": 48.25
+}
