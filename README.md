@@ -248,8 +248,10 @@ J'ai aussi effectué plusieurs sessions à diff moments de la journée (entre le
 
 ### Gestion des erreurs
 J'ai utilisé try et except pour détecter les erreurs de comm avec l'API. Et si y'a une erreur réseau, il y aura un message qui s'affiche et le programme va continuer avec la tentative d'après. 
+
 --- 
-## Partie 2: Analyse des arrêts TPG**
+
+## Partie 2: Analyse des arrêts TPG 
 
 ### 1. objectif
 Pour cette deuxième partie, il fallait choisir une API existante et créer un programme Python qui permet à l'utilisateur d'entrer quelque chose et de récupérer des résultats à partir de cette entrée. Les résultats devaient aussi être enregistrés dans des fichiers JSON ou XML. Du coup j'ai choisi de travailler avec les données des TPG, parce que c'est quelque chose qu'on utilise à Genève et je trouvais ça intéressant de pouvoir récupérer des informations sur les arrêts. J'ai décidé de faire deux scénarios différents. Le premier permet de connaître la fréquentation d'un arrêt, et le deuxième permet de rechercher tous les arrêts qui commencent par une certaine lettre.
