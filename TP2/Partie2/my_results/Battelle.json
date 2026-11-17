@@ -1,0 +1,11 @@
+{
+    "arret": "Battelle",
+    "date_donnees": "2026-02-07",
+    "codes_arrets": [
+        "BALE00"
+    ],
+    "total_montees": 2.73,
+    "total_descentes": 32.76,
+    "pourcentage_montees": 7.69,
+    "pourcentage_descentes": 92.31
+}
