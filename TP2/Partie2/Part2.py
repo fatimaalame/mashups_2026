@@ -29,5 +29,12 @@ reponse_montees = requests.get(
 reponse_montees.raise_for_status()
 donnees_montees = reponse_montees.json()
 
+total_montees = 0 
+total_descentes = 0 
+
 for mesure in donnees_montees["results"]:
-    print(mesure["date"], mesure["ligne"], mesure["nb_de_montees"], mesure["nb_de_descentes"])
+    total_montees += mesure ["nb_de_montees"]
+    total_descentes += mesure ["nb_de_descentes"]
+
+print("Total montées:", round(total_montees, 2))
+print("Total descentes:", round(total_descentes, 2))
