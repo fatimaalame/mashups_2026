@@ -97,6 +97,59 @@ def analyser_frequentation():
     with open(chemin_fichier, "w", encoding="utf-8") as fichier:
         json.dump(resultat, fichier, indent=4, ensure_ascii=False)
 
+def rechercher_par_lettre():
+    print()
+    print(" -- recherche des arrets par lettre --")
+    lettre=input("Entrez une lettre: ").strip().upper()
+
+    if len(lettre) != 1 or not lettre.isalpha():
+        print("Erreur: entrez une seule lettre svp.")
+        return 
+    noms_arrets = []
+    offset = 0 
+    
+    while True: 
+        reponse = requests.get(
+            url_catalogue_tpg, 
+            params = {"where": f"startswith(nomarret, '{lettre}')", "order_by":"nomarret asc", "limit":100, "offset": offset},
+            timeout=10
+        )
+        reponse.raise_for_status()
+        donnees = reponse.json()
+
+        for arret in donnees ["results"]:
+            nom = arret ["nomarret"]
+            if nom not in noms_arrets:
+                noms_arrets.append(nom)
+        offset += len(donnees["results"])
+
+        if offset >= donnees ["total_count"]:
+            break 
+
+    noms_arrets.sort()   
+
+    print () 
+    print("Arrets commencant par", lettre, ":")
+    for nom in noms_arrets:
+        print("->", nom) 
+    print("nb d'arrets: ", len(noms_arrets))  
+
+    dossier_lettres = os.path.join(os.path.dirname(__file__),"results_letter")
+    os.makedirs(dossier_lettres, exist_ok=True)
+
+    resultat = {
+        "lettre": lettre,
+        "nombre_arrets": len(noms_arrets),
+        "arrets": noms_arrets
+    }
+
+    nom_fichier = "lettre_" + lettre + ".json"
+    chemin_fichier = os.path.join(dossier_lettres, nom_fichier)
+
+    with open (chemin_fichier, "w", encoding="utf-8") as fichier: 
+        json.dump (resultat, fichier, indent=4, ensure_ascii=False)
+
+
 def main ():
     choix = "" 
     while choix != "0":
@@ -111,7 +164,7 @@ def main ():
         if choix == "1":
             analyser_frequentation()
         elif choix == "2":
-            print("scénario 2 par encore fait")
+            rechercher_par_lettre()
         elif choix == "0":
             print("Au revoir")
             print ()
